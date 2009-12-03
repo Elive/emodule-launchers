@@ -1,106 +1,108 @@
-# This file is put in the public domain.
+# Croatian translation for enlightenment
+# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# This file is distributed under the same license as the enlightenment package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
 #
-# Daniel Korostil <ted.korostiled@gmail.com>, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: places.HEAD\n"
-"Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
+"Project-Id-Version: enlightenment\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-05 16:07+0800\n"
-"PO-Revision-Date: 2009-11-12 17:50+0000\n"
-"Last-Translator: Sergio Gavrylov <sergiovana@bigmir.net>\n"
-"Language-Team: Ukrainian <translation@linux.org.ua>\n"
+"PO-Revision-Date: 2009-11-09 18:11+0000\n"
+"Last-Translator: Miro Glavić <glavicmiro@gmail.com>\n"
+"Language-Team: Croatian <hr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-13 11:33+0000\n"
+"X-Launchpad-Export-Date: 2009-11-12 04:54+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #. create new config dialog
 #: ../src/e_mod_config.c:51
 msgid "Places Configuration"
-msgstr "Налаштування місцин"
+msgstr "Konfiguracija Mjesta"
 
 #. General frame
 #: ../src/e_mod_config.c:118
 msgid "General"
-msgstr "Загальні"
+msgstr "Općenito"
 
 #: ../src/e_mod_config.c:121
 msgid "Show in main menu"
-msgstr "Показати в головному меню"
+msgstr "Prikaži u glavnom izborniku"
 
 #: ../src/e_mod_config.c:125
 msgid "Mount volumes on insert"
-msgstr "Змонтовувати том при вводі"
+msgstr "Postavi jačine pri ubacivanju"
 
 #: ../src/e_mod_config.c:129
 msgid "Open filemanager on insert"
-msgstr "Відкривати менеджера файлів при вводі"
+msgstr "Otvori upravitelja datoteka pri ubacivanju"
 
 #: ../src/e_mod_config.c:133
 msgid "Use a custom file manager"
-msgstr "Використовувати звичайного менеджера файлів"
+msgstr "Upotrijebi podešenog upravitelja datotekama"
 
 #. Display frame
 #: ../src/e_mod_config.c:146
 msgid "Show in menu"
-msgstr "Показати в меню"
+msgstr "Prikaži u izborniku"
 
 #: ../src/e_mod_config.c:149 ../src/e_mod_places.c:399
 msgid "Home"
-msgstr "Домівка"
+msgstr "Glavna"
 
 #: ../src/e_mod_config.c:152 ../src/e_mod_places.c:408
 msgid "Desktop"
-msgstr "Стільниця"
+msgstr "Radna površina"
 
 #: ../src/e_mod_config.c:155 ../src/e_mod_places.c:418
 msgid "Trash"
-msgstr "Корзина"
+msgstr "Smeće"
 
 #: ../src/e_mod_config.c:158 ../src/e_mod_places.c:229
 #: ../src/e_mod_places.c:427
 msgid "Filesystem"
-msgstr "Файлова система"
+msgstr "Datotečni sustav"
 
 #: ../src/e_mod_config.c:161 ../src/e_mod_places.c:436
 msgid "Temp"
-msgstr "Тимчасові"
+msgstr "Temp"
 
 #: ../src/e_mod_config.c:164
 msgid "Favorites"
-msgstr "Улюблені"
+msgstr "Omiljeni"
 
 #. Display this Modules config info in the main Config Panel
 #: ../src/e_mod_main.c:75
 msgid "Files"
-msgstr "Файли"
+msgstr "Datoteke"
 
 #: ../src/e_mod_main.c:77 ../src/e_mod_places.c:499
 msgid "Places"
-msgstr "Місцини"
+msgstr "Mjesta"
 
 #: ../src/e_mod_main.c:443
 msgid "Configuration"
-msgstr "Налаштування"
+msgstr "Konfiguracija"
 
 #: ../src/e_mod_places.c:234
 msgid "No Name"
-msgstr "Без назви"
+msgstr "Bez Naziva"
 
 #: ../src/e_mod_places.c:689
 msgid "free of"
-msgstr "вільно з"
+msgstr "bez"
 
 #: ../src/e_mod_places.c:695
 #, c-format
 msgid "%s Not Mounted"
-msgstr "%s не змонтований"
+msgstr "%s Nije Montiran"
 
 #: ../src/e_mod_places.c:712
 msgid "unmount"
-msgstr "демонтувати"
+msgstr "demontiraj"
 
 #: ../src/e_mod_places.c:718
 msgid "eject"
-msgstr "вийняти"
+msgstr "izbaci"
