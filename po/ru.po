@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enlightenment\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-10-27 19:45+0400\n"
-"PO-Revision-Date: 2012-10-27 19:45+0400\n"
+"POT-Creation-Date: 2012-12-28 01:39+0400\n"
+"PO-Revision-Date: 2012-12-28 01:39+0400\n"
 "Last-Translator: Igor Murzov <e-mail@date.by>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "Language: ru\n"
@@ -82,7 +82,8 @@ msgstr "Избранное"
 msgid "Files"
 msgstr "Файлы"
 
-#: src/e_mod_main.c:61 src/e_mod_places.c:236 src/e_mod_places.c:868
+#: src/e_mod_main.c:61 src/e_mod_main.c:298 src/e_mod_places.c:236
+#: src/e_mod_places.c:868
 msgid "Places"
 msgstr "Места"
 
@@ -103,8 +104,8 @@ msgid ""
 "<b>Cannot run the Enlightenment FileManager.</b><br>Please choose a custom "
 "file manager in<br>the gadget configuration."
 msgstr ""
-"<b>Не удалось запустить файловый менеджер из Enlightenment.</b><br>"
-"Пожалуйста, выберите другой файловый менеджер в настройках гаджета."
+"<b>Не удалось запустить EFM.</b><br>Пожалуйста, выберите другой файловый "
+"менеджер<br>в настройках гаджета."
 
 #: src/e_mod_places.c:622
 msgid "No Name"
