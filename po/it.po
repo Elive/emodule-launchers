@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Places\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-09-15 17:28+0200\n"
+"POT-Creation-Date: 2013-04-14 18:28+0200\n"
 "PO-Revision-Date: 2012-09-15 17:29+0200\n"
 "Last-Translator: DaveMDS <dave@gurumeditation.it>\n"
 "Language-Team: none\n"
@@ -79,7 +79,8 @@ msgstr "Preferiti"
 msgid "Files"
 msgstr "File"
 
-#: src/e_mod_main.c:61 src/e_mod_places.c:236 src/e_mod_places.c:868
+#: src/e_mod_main.c:61 src/e_mod_main.c:298 src/e_mod_places.c:236
+#: src/e_mod_places.c:868
 msgid "Places"
 msgstr "Risorse"
 

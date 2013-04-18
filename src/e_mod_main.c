@@ -2,7 +2,6 @@
 # include "config.h"
 #endif
 #include <e.h>
-#include <E_DBus.h>
 #include "e_mod_main.h"
 #include "e_mod_places.h"
 

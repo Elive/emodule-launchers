@@ -11,14 +11,15 @@
 #ifdef HAVE_EEZE
 # include "e_mod_eeze.h"
 #endif
+#ifdef HAVE_EDBUS2
+# include "e_mod_udisks_edbus2.h"
+#endif
 
 /* Local Function Prototypes */
 static Eina_Bool _places_poller(void *data);
 static const char *_places_human_size_get(unsigned long long size);
 static void _places_volume_object_update(Volume *vol, Evas_Object *obj);
 static void _places_run_fm(void *data, E_Menu *m, E_Menu_Item *mi);
-
-
 
 /* Edje callbacks */
 void _places_icon_activated_cb(void *data, Evas_Object *o, const char *emission, const char *source);
@@ -46,6 +47,9 @@ places_init(void)
 #ifdef HAVE_EEZE
    places_eeze_init();
 #endif
+#ifdef HAVE_EDBUS2
+   places_udisks_edbus2_init();
+#endif
 
    snprintf(theme_file, PATH_MAX, "%s/e-module-places.edj",
             places_conf->module->dir);
@@ -57,15 +61,18 @@ places_shutdown(void)
 {
    if (poller) ecore_timer_del(poller);
 
+   while (volumes)
+     places_volume_del((Volume*)volumes->data);
+
 #ifdef HAVE_UDISKS
    places_udisks_shutdown();
 #endif
 #ifdef HAVE_EEZE
    places_eeze_shutdown();
 #endif
-
-   while (volumes)
-     places_volume_del((Volume*)volumes->data);
+#ifdef HAVE_EDBUS2
+   places_udisks_edbus2_shutdown();
+#endif
 }
 
 Eina_List *
@@ -87,13 +94,18 @@ places_volume_add(const char *id, Eina_Bool first_time)
    v->id = eina_stringshare_add(id);
    v->valid = EINA_FALSE;
    v->objs = NULL;
-   v->icon = NULL;
-   v->device = NULL;
+   v->icon = eina_stringshare_add("");
+   v->device = eina_stringshare_add("");
+   v->label = eina_stringshare_add("");
+   v->mount_point = eina_stringshare_add("");
+   v->fstype = eina_stringshare_add("");
    v->to_mount = EINA_FALSE;
    v->force_open = EINA_FALSE;
-   v->drive_type = "";
-   v->model = "";
-   v->bus = "";
+   v->drive_type = eina_stringshare_add("");
+   v->model = eina_stringshare_add("");
+   v->serial = eina_stringshare_add("");
+   v->vendor = eina_stringshare_add("");
+   v->bus = eina_stringshare_add("");
    v->to_mount = ((places_conf->auto_mount && !first_time) ||
                   (first_time && places_conf->boot_mount));
    v->force_open = (places_conf->auto_open && !first_time);
@@ -109,6 +121,9 @@ places_volume_del(Volume *v)
    Evas_Object *o;
    Evas_Object *swal;
 
+   if (v->free_func)
+      v->free_func(v);
+
    volumes = eina_list_remove(volumes, v);
    EINA_LIST_FREE(v->objs, o)
      {
@@ -122,7 +137,7 @@ places_volume_del(Volume *v)
         e_box_unpack(o);
         evas_object_del(o);
      }
-   if (v->id)         eina_stringshare_del(v->id);
+   if (v->id)          eina_stringshare_del(v->id);
    if (v->label)       eina_stringshare_del(v->label);
    if (v->icon)        eina_stringshare_del(v->icon);
    if (v->mount_point) eina_stringshare_del(v->mount_point);
@@ -133,7 +148,7 @@ places_volume_del(Volume *v)
    if (v->model)       eina_stringshare_del(v->model);
    if (v->vendor)      eina_stringshare_del(v->vendor);
    if (v->serial)      eina_stringshare_del(v->serial);
-   
+
    free(v);
 }
 
@@ -251,7 +266,6 @@ places_fill_box(Evas_Object *box)
                         );
    edje_object_signal_callback_add(o, "header,activated", "places",
                                    _places_header_activated_cb, NULL);
-
 
    // volume objects
    for (l = volumes; l; l = l->next)
@@ -373,8 +387,9 @@ places_empty_box(Evas_Object *box)
    count = e_box_pack_count_get(box);
    while (count >= 0)
      {
-        Evas_Object *o;
-        Evas_Object *swal;
+        Volume *vol;
+        Eina_List *l;
+        Evas_Object *o, *swal;
 
         o = e_box_pack_object_nth(box, count);
         swal = edje_object_part_swallow_get(o, "icon");
@@ -383,6 +398,9 @@ places_empty_box(Evas_Object *box)
              edje_object_part_unswallow(o, swal);
              evas_object_del(swal);
           }
+
+        EINA_LIST_FOREACH(volumes, l, vol)
+          vol->objs = eina_list_remove(vol->objs, o);
 
         e_box_unpack(o);
         evas_object_del(o);
@@ -432,7 +450,7 @@ places_print_volume(Volume *v)
 {
    const char *size, *free;
 
-   printf("Got volume %s\n", v->id);
+   printf("Got volume %s (totals: %d)\n", v->id, eina_list_count(volumes));
    printf("  label: %s\n",v->label);
    printf("  mounted: %d\n", v->mounted);
    printf("  m_point: %s\n", v->mount_point);
@@ -616,7 +634,7 @@ _places_volume_object_update(Volume *vol, Evas_Object *obj)
    // the volume label
    if (vol->mount_point && !strcmp(vol->mount_point, "/"))
      edje_object_part_text_set(obj, "volume_label", D_("Filesystem"));
-   else if (vol->label && strlen(vol->label))
+   else if (vol->label && vol->label[0])
      edje_object_part_text_set(obj, "volume_label", vol->label);
    else
      edje_object_part_text_set(obj, "volume_label", D_("No Name"));

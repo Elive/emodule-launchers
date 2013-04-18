@@ -41,6 +41,8 @@ struct _Volume
    void (*mount_func)(Volume *vol, Eina_List *opts);
    void (*unmount_func)(Volume *vol, Eina_List *opts);
    void (*eject_func)(Volume *vol, Eina_List *opts);
+   void (*free_func)(Volume *vol);
+   void *backend_data;
 };
 
 void places_init(void);
