@@ -33,11 +33,53 @@ collections
       }
    }
 /****************************************************/
+/**  GADGET MAIN BOX  *******************************/
+/****************************************************/
+   group { name: "modules/places/main";
+      parts {
+         // part { name: "DEBUG";
+            // type: RECT;
+            // description { state: "default" 0.0;
+               // color: 200 0 0 100;
+            // }
+         // }
+         part { name: "box";
+            type: BOX;
+            description { state: "default" 0.0;
+               box {
+                  layout: "vertical";
+                  align: 0.5 0.0;
+               }
+            }
+            description { state: "horiz" 0.0;
+               box {
+                  layout: "orizontal";
+                  align: 0.5 0.5;
+               }
+            }
+         }
+      }
+      programs {
+         program { name: "set_box_horiz";
+            signal: "box,set,horiz";
+            source: "places";
+            action: STATE_SET "horiz" 0.0;
+            target: "box";
+         }
+         program { name: "set_box_vert";
+            signal: "box,set,vert";
+            source: "places";
+            action: STATE_SET "default" 0.0;
+            target: "box";
+         }
+      }
+   }
+/****************************************************/
 /**  GADGET HEADER  *********************************/
 /****************************************************/
    group { name: "modules/places/header";
       min: 120 35;
-      max: 384 60;
+      max: 384 35;
       parts {
          part { name: "bg";
             mouse_events: 1;
@@ -99,8 +141,9 @@ collections
             }
             description { state: "vert" 0.0;
                rel1.relative: 1.0 0.0;
-               rel2.relative: 1.0 0.0;
-               rel2.offset: 0 50;
+               rel2.relative: 1.0 1.0;
+               rel2.offset: 0 0;
+               color: 0 0 0 100;
                color: 0 0 0 100;
             }
          }
@@ -210,7 +253,7 @@ collections
             description { state: "vert" 0.0;
                rel1.relative: 1.0 0.0;
                rel2.relative: 1.0 1.0;
-               rel2.offset: 0 47;
+               rel2.offset: 0 0;
                color: 0 0 0 100;
             }
          }
@@ -240,8 +283,8 @@ collections
 /****************************************************/
 /**  GADGET VOLUME  *********************************/
 /****************************************************/
-   group { name: "modules/places/main";
-      min: 90 50;
+   group { name: "modules/places/volume";
+      min: 150 50;
       max: 384 50;
       script { /* this set the gauge value */
          public message(Msg_Type:type, id, ...) {

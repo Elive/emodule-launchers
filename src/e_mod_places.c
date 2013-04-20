@@ -75,6 +75,17 @@ places_shutdown(void)
 #endif
 }
 
+Evas_Object *
+places_main_obj_create(Evas *canvas)
+{
+   Evas_Object *o;
+
+   o = edje_object_add(canvas);
+   edje_object_file_set(o, theme_file, "modules/places/main");
+
+   return o;
+}
+
 Eina_List *
 places_volume_list_get(void)
 {
@@ -120,6 +131,8 @@ places_volume_del(Volume *v)
 {
    Evas_Object *o;
    Evas_Object *swal;
+   Eina_List *l;
+   Instance *inst;
 
    if (v->free_func)
       v->free_func(v);
@@ -134,7 +147,9 @@ places_volume_del(Volume *v)
              evas_object_del(swal);
           }
 
-        e_box_unpack(o);
+        EINA_LIST_FOREACH(instances, l, inst)
+          edje_object_part_box_remove(inst->o_main, "box", o);
+
         evas_object_del(o);
      }
    if (v->id)          eina_stringshare_del(v->id);
@@ -148,8 +163,7 @@ places_volume_del(Volume *v)
    if (v->model)       eina_stringshare_del(v->model);
    if (v->vendor)      eina_stringshare_del(v->vendor);
    if (v->serial)      eina_stringshare_del(v->serial);
-
-   free(v);
+   E_FREE(v);
 }
 
 Volume *
@@ -191,7 +205,7 @@ places_update_all_gadgets(void)
 
    volumes = eina_list_sort(volumes, 0, _places_volume_sort_cb);
    EINA_LIST_FOREACH(instances, l, inst)
-     places_fill_box(inst->o_box);
+     places_fill_box(inst->o_main, inst->horiz);
 }
 
 void
@@ -219,7 +233,7 @@ places_volume_update(Volume *vol)
 }
 
 void
-places_fill_box(Evas_Object *box)
+places_fill_box(Evas_Object *main, Eina_Bool horiz)
 {
    Eina_List *l;
    int min_w, min_h, max_w, max_h, found;
@@ -227,7 +241,7 @@ places_fill_box(Evas_Object *box)
    char *f1, *f2, *f3;
    char buf[128];
 
-   places_empty_box(box);
+   places_empty_box(main);
 
    /*if (places_conf->show_home)
       _places_custom_volume(box, D_("Home"), "e/icons/fileman/home", "/home/dave");
@@ -241,29 +255,33 @@ places_fill_box(Evas_Object *box)
       _places_custom_volume(box, D_("Temp"), "e/icons/fileman/tmp", "/tmp");
    */
 
+   // orient the edje box
+   if (horiz)
+      edje_object_signal_emit(main, "box,set,horiz", "places");
+   else
+      edje_object_signal_emit(main, "box,set,vert", "places");
 
-   o = edje_object_add(evas_object_evas_get(box));
+   // header (or just a separator if header is not wanted)
+   o = edje_object_add(evas_object_evas_get(main));
    if (places_conf->hide_header)
      edje_object_file_set(o, theme_file, "modules/places/separator");
    else
      edje_object_file_set(o, theme_file, "modules/places/header");
 
    edje_object_part_text_set(o, "label", D_("Places"));
-   if (!e_box_orientation_get(box))
-      edje_object_signal_emit(o, "separator,set,horiz", "places");
-   else
+   if (horiz)
       edje_object_signal_emit(o, "separator,set,vert", "places");
+   else
+      edje_object_signal_emit(o, "separator,set,horiz", "places");
+
    edje_object_size_min_get(o, &min_w, &min_h);
    edje_object_size_max_get(o, &max_w, &max_h);
+   evas_object_size_hint_min_set(o, min_w, min_h);
+   evas_object_size_hint_max_set(o, max_w, max_h);
+   evas_object_size_hint_align_set(o, EVAS_HINT_FILL, EVAS_HINT_FILL);
+   edje_object_part_box_append(main, "box", o);
    evas_object_show(o);
-   e_box_pack_end(box, o);
-   e_box_pack_options_set(o,
-                        1, 0, /* fill */
-                        0, 0, /* expand */
-                        0.5, 0.0, /* align */
-                        min_w, min_h, /* min */
-                        max_w, max_h /* max */
-                        );
+
    edje_object_signal_callback_add(o, "header,activated", "places",
                                    _places_header_activated_cb, NULL);
 
@@ -275,12 +293,12 @@ places_fill_box(Evas_Object *box)
         if (!vol->valid) continue;
 
         //volume object
-        o = edje_object_add(evas_object_evas_get(box));
-        edje_object_file_set(o, theme_file, "modules/places/main");
+        o = edje_object_add(evas_object_evas_get(main));
+        edje_object_file_set(o, theme_file, "modules/places/volume");
         vol->objs = eina_list_append(vol->objs, o);
 
         //choose the right icon
-        icon = e_icon_add(evas_object_evas_get(box));
+        icon = e_icon_add(evas_object_evas_get(main));
         f1 = f2 = f3 = NULL;
         /* optical discs */
         if (!strcmp(vol->drive_type, "cdrom") ||
@@ -352,10 +370,10 @@ places_fill_box(Evas_Object *box)
         _places_volume_object_update(vol, o);
 
         // orient the separator
-        if (!e_box_orientation_get(box))
-          edje_object_signal_emit(o, "separator,set,horiz", "places");
-        else
+        if (horiz)
           edje_object_signal_emit(o, "separator,set,vert", "places");
+        else
+          edje_object_signal_emit(o, "separator,set,horiz", "places");
 
         // connect signals from edje
         edje_object_signal_callback_add(o, "icon,activated", "places",
@@ -364,50 +382,39 @@ places_fill_box(Evas_Object *box)
                                         _places_eject_activated_cb, vol);
 
         // pack the volume in the box
-        evas_object_show(o);
         edje_object_size_min_get(o, &min_w, &min_h);
         edje_object_size_max_get(o, &max_w, &max_h);
-        e_box_pack_end(box, o);
-        e_box_pack_options_set(o,
-                               1, 0, /* fill */
-                               1, 0, /* expand */
-                               0.5, 0.0, /* align */
-                               min_w, min_h, /* min */
-                               max_w, max_h /* max */
-                              );
+        evas_object_size_hint_min_set(o, min_w, min_h);
+        evas_object_size_hint_max_set(o, max_w, max_h);
+        evas_object_size_hint_align_set(o, EVAS_HINT_FILL, EVAS_HINT_FILL);
+        edje_object_part_box_append(main, "box", o);
+        evas_object_show(o);
      }
 }
 
 void
-places_empty_box(Evas_Object *box)
+places_empty_box(Evas_Object *main)
 {
-   int count;
+   Evas_Object *o;
 
-   e_box_freeze(box);
-   count = e_box_pack_count_get(box);
-   while (count >= 0)
-     {
-        Volume *vol;
-        Eina_List *l;
-        Evas_Object *o, *swal;
+   while ((o = edje_object_part_box_remove_at(main, "box", 0)))
+   {
+      Volume *vol;
+      Evas_Object *swal;
+      Eina_List *l;
 
-        o = e_box_pack_object_nth(box, count);
-        swal = edje_object_part_swallow_get(o, "icon");
-        if (swal)
-          {
-             edje_object_part_unswallow(o, swal);
-             evas_object_del(swal);
-          }
+      swal = edje_object_part_swallow_get(o, "icon");
+      if (swal)
+      {
+         edje_object_part_unswallow(o, swal);
+         evas_object_del(swal);
+      }
 
-        EINA_LIST_FOREACH(volumes, l, vol)
-          vol->objs = eina_list_remove(vol->objs, o);
+      EINA_LIST_FOREACH(volumes, l, vol)
+         vol->objs = eina_list_remove(vol->objs, o);
 
-        e_box_unpack(o);
-        evas_object_del(o);
-
-        count--;
-     }
-   e_box_thaw(box);
+      evas_object_del(o);
+   }
 }
 
 void
@@ -480,7 +487,7 @@ _places_custom_volume(Evas_Object *box, const char *label, const char *icon, con
 
    /* volume object */
    o = edje_object_add(evas_object_evas_get(box));
-   edje_object_file_set(o, theme_file, "modules/places/main");
+   edje_object_file_set(o, theme_file, "modules/places/volume");
 
    /* icon */
    i = edje_object_add(evas_object_evas_get(box));

@@ -202,19 +202,21 @@ _gc_init(E_Gadcon *gc, const char *name, const char *id, const char *style)
    inst = E_NEW(Instance, 1);
    inst->conf_item = _places_conf_item_get(id);
 
-   inst->o_box = e_box_add(gc->evas);
-   e_box_homogenous_set(inst->o_box, 0);
-   e_box_orientation_set(inst->o_box, 0);
-   e_box_align_set(inst->o_box, 0.0, 0.0);
+   if (1) // site is desktop
+   {
+      inst->o_main = places_main_obj_create(gc->evas);
+      evas_object_event_callback_add(inst->o_main, EVAS_CALLBACK_MOUSE_DOWN,
+                                     _places_cb_mouse_down, inst);
+      inst->gcc = e_gadcon_client_new(gc, name, id, style, inst->o_main);
+      places_fill_box(inst->o_main, EINA_FALSE);
+   }
+   else
+   {
+      // TODO site is shelf or toolbar
+   }
 
-   inst->gcc = e_gadcon_client_new(gc, name, id, style, inst->o_box);
    inst->gcc->data = inst;
-
-   evas_object_event_callback_add(inst->o_box, EVAS_CALLBACK_MOUSE_DOWN,
-                                  _places_cb_mouse_down, inst);
-
    instances = eina_list_append(instances, inst);
-   places_fill_box(inst->o_box);
 
    return inst->gcc;
 }
@@ -234,12 +236,12 @@ _gc_shutdown(E_Gadcon_Client *gcc)
         inst->menu = NULL;
      }
 
-   if (inst->o_box)
+   if (inst->o_main)
      {
-        evas_object_event_callback_del(inst->o_box, EVAS_CALLBACK_MOUSE_DOWN,
+        evas_object_event_callback_del(inst->o_main, EVAS_CALLBACK_MOUSE_DOWN,
                                        _places_cb_mouse_down);
-        places_empty_box(inst->o_box);
-        evas_object_del(inst->o_box);
+        places_empty_box(inst->o_main);
+        evas_object_del(inst->o_main);
      }
 
    E_FREE(inst);
@@ -267,9 +269,9 @@ _gc_orient(E_Gadcon_Client *gcc, E_Gadcon_Orient orient)
       case E_GADCON_ORIENT_CORNER_BL:
       case E_GADCON_ORIENT_CORNER_BR:
         // TODO get sizes from the theme
-        e_gadcon_client_aspect_set(gcc, 100 * count, 60);
-        e_gadcon_client_min_size_set(gcc, 100 * count, 60);
-        e_box_orientation_set(inst->o_box, 1);
+        e_gadcon_client_aspect_set(gcc, 200 * count, 60);
+        e_gadcon_client_min_size_set(gcc, 200 * count, 60);
+        inst->horiz = EINA_TRUE;
         break;
       case E_GADCON_ORIENT_FLOAT:
       case E_GADCON_ORIENT_VERT:
@@ -282,13 +284,13 @@ _gc_orient(E_Gadcon_Client *gcc, E_Gadcon_Orient orient)
         // TODO get sizes from the theme
         e_gadcon_client_aspect_set(gcc, 200, 50 * count);
         e_gadcon_client_min_size_set(gcc, 200, 50 * count);
-        e_box_orientation_set(inst->o_box, 0);
+        inst->horiz = EINA_FALSE;
         break;
       default:
         break;
      }
 
-   places_fill_box(inst->o_box);
+   places_fill_box(inst->o_main, inst->horiz);
 }
 
 static const char *
