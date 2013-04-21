@@ -18,6 +18,7 @@ static void _places_conf_new(void);
 static void _places_conf_free(void);
 static Eina_Bool _places_conf_timer(void *data);
 static Config_Item *_places_conf_item_get(const char *id);
+static void _places_icon_cb_mouse_down(void *data, Evas *evas, Evas_Object *obj, void *event);
 static void _places_cb_mouse_down(void *data, Evas *evas, Evas_Object *obj, void *event);
 static void _places_cb_menu_post(void *data, E_Menu *menu);
 static void _places_cb_menu_configure(void *data, E_Menu *mn, E_Menu_Item *mi);
@@ -34,8 +35,8 @@ static const E_Gadcon_Client_Class _gc_class =
 {
    GADCON_CLIENT_CLASS_VERSION, "Places",
      {_gc_init, _gc_shutdown, _gc_orient, _gc_label, _gc_icon,
-          _gc_id_new, _gc_id_del, e_gadcon_site_is_not_toolbar},
-   E_GADCON_CLIENT_STYLE_INSET
+          _gc_id_new, _gc_id_del, NULL},
+   E_GADCON_CLIENT_STYLE_PLAIN
 };
 
 EAPI E_Module_Api e_modapi = {E_MODULE_API_VERSION, "Places"};
@@ -193,7 +194,7 @@ places_menu_augmentation(void)
      }
 }
 
-/* Gadcon Functions */
+/* Gadcon IFace */
 static E_Gadcon_Client *
 _gc_init(E_Gadcon *gc, const char *name, const char *id, const char *style)
 {
@@ -202,7 +203,7 @@ _gc_init(E_Gadcon *gc, const char *name, const char *id, const char *style)
    inst = E_NEW(Instance, 1);
    inst->conf_item = _places_conf_item_get(id);
 
-   if (1) // site is desktop
+   if (e_gadcon_site_is_desktop(gc->location->site))
    {
       inst->o_main = places_main_obj_create(gc->evas);
       evas_object_event_callback_add(inst->o_main, EVAS_CALLBACK_MOUSE_DOWN,
@@ -212,7 +213,11 @@ _gc_init(E_Gadcon *gc, const char *name, const char *id, const char *style)
    }
    else
    {
-      // TODO site is shelf or toolbar
+      inst->o_icon = e_icon_add(gc->evas);
+      e_util_icon_theme_set(inst->o_icon, "drive-harddisk");
+      inst->gcc = e_gadcon_client_new(gc, name, id, style, inst->o_icon);
+      evas_object_event_callback_add(inst->o_icon, EVAS_CALLBACK_MOUSE_DOWN,
+                                     _places_icon_cb_mouse_down, inst);
    }
 
    inst->gcc->data = inst;
@@ -250,47 +255,44 @@ _gc_shutdown(E_Gadcon_Client *gcc)
 static void
 _gc_orient(E_Gadcon_Client *gcc, E_Gadcon_Orient orient)
 {
-   Instance *inst;
-   Volume *v;
-   Eina_List *l;
-   int count = 1;
+   Instance *inst = gcc->data;
+   Evas_Coord min_w, min_h;
+ 
+   if (e_gadcon_site_is_desktop(gcc->gadcon->location->site))
+   {
+      switch (orient)
+      {
+         case E_GADCON_ORIENT_HORIZ:
+         case E_GADCON_ORIENT_TOP:
+         case E_GADCON_ORIENT_BOTTOM:
+         case E_GADCON_ORIENT_CORNER_TL:
+         case E_GADCON_ORIENT_CORNER_TR:
+         case E_GADCON_ORIENT_CORNER_BL:
+         case E_GADCON_ORIENT_CORNER_BR:
+            inst->horiz = EINA_TRUE;
+            break;
+         case E_GADCON_ORIENT_FLOAT:
+         case E_GADCON_ORIENT_VERT:
+         case E_GADCON_ORIENT_LEFT:
+         case E_GADCON_ORIENT_RIGHT:
+         case E_GADCON_ORIENT_CORNER_LT:
+         case E_GADCON_ORIENT_CORNER_RT:
+         case E_GADCON_ORIENT_CORNER_LB:
+         case E_GADCON_ORIENT_CORNER_RB:
+         default:
+            inst->horiz = EINA_FALSE;
+            break;
+      }
 
-   EINA_LIST_FOREACH(places_volume_list_get(), l, v)
-      if (v->valid) count++;
-
-   inst = gcc->data;
-   switch (orient)
-     {
-      case E_GADCON_ORIENT_HORIZ:
-      case E_GADCON_ORIENT_TOP:
-      case E_GADCON_ORIENT_BOTTOM:
-      case E_GADCON_ORIENT_CORNER_TL:
-      case E_GADCON_ORIENT_CORNER_TR:
-      case E_GADCON_ORIENT_CORNER_BL:
-      case E_GADCON_ORIENT_CORNER_BR:
-        // TODO get sizes from the theme
-        e_gadcon_client_aspect_set(gcc, 200 * count, 60);
-        e_gadcon_client_min_size_set(gcc, 200 * count, 60);
-        inst->horiz = EINA_TRUE;
-        break;
-      case E_GADCON_ORIENT_FLOAT:
-      case E_GADCON_ORIENT_VERT:
-      case E_GADCON_ORIENT_LEFT:
-      case E_GADCON_ORIENT_RIGHT:
-      case E_GADCON_ORIENT_CORNER_LT:
-      case E_GADCON_ORIENT_CORNER_RT:
-      case E_GADCON_ORIENT_CORNER_LB:
-      case E_GADCON_ORIENT_CORNER_RB:
-        // TODO get sizes from the theme
-        e_gadcon_client_aspect_set(gcc, 200, 50 * count);
-        e_gadcon_client_min_size_set(gcc, 200, 50 * count);
-        inst->horiz = EINA_FALSE;
-        break;
-      default:
-        break;
-     }
-
-   places_fill_box(inst->o_main, inst->horiz);
+      places_fill_box(inst->o_main, inst->horiz);
+      evas_object_size_hint_min_get(inst->o_main, &min_w, &min_h);
+      e_gadcon_client_min_size_set(gcc, min_w, min_h);
+   }
+   else
+   {
+      e_gadcon_client_min_size_set(gcc, 16, 16);
+      e_gadcon_client_aspect_set(gcc, 16, 16);
+   }
 }
 
 static const char *
@@ -410,7 +412,77 @@ _places_conf_item_get(const char *id)
    return ci;
 }
 
+/* popup */
 static void
+_places_popup_del(Instance *inst)
+{
+   if (inst->popup)
+     e_object_del(E_OBJECT(inst->popup));
+}
+
+static void
+_places_popup_del_cb(Evas_Object *obj)
+{
+   Instance *inst;
+
+   inst = e_object_data_get(E_OBJECT(obj));
+   if (!inst) return;
+
+   places_empty_box(inst->o_main);
+   evas_object_del(inst->o_main);
+   inst->o_main = NULL;
+   inst->popup = NULL;
+}
+
+static void
+_places_popup_new(Instance *inst)
+{
+   E_Gadcon_Popup *popup;
+
+   // do not create twice
+   if (inst->popup)
+      return;
+
+   // create the popup
+   popup = e_gadcon_popup_new(inst->gcc);
+   if (0) // TODO make popup_autoclose an option (and close when volume selected?)
+     e_popup_autoclose(popup->win, NULL, NULL);
+   e_object_data_set(E_OBJECT(popup), inst);
+   E_OBJECT_DEL_SET(popup, _places_popup_del_cb);
+   inst->popup = popup;
+
+   // build and fill the main edje object
+   inst->o_main = places_main_obj_create(popup->win->evas);
+   evas_object_event_callback_add(inst->o_main, EVAS_CALLBACK_MOUSE_DOWN,
+                                  _places_cb_mouse_down, inst);
+   places_fill_box(inst->o_main, EINA_FALSE);
+
+   // show the popup
+   e_gadcon_popup_content_set(popup, inst->o_main);
+   e_gadcon_popup_show(popup);
+}
+
+static void // mouse down on the icon (for shelf and toolbars)
+_places_icon_cb_mouse_down(void *data, Evas *evas, Evas_Object *obj, void *event)
+{
+   Instance *inst = data;
+   Evas_Event_Mouse_Down *ev = event;
+   
+   if (!inst)
+     return;
+
+   if (ev->button == 1)
+   {
+      if (!inst->o_main)
+         _places_popup_new(inst);
+      else
+         _places_popup_del(inst);
+   }
+   else if (ev->button == 3)
+     _places_cb_mouse_down(inst, evas, obj, event);
+}
+
+static void // mouse down on the main edje object (the list of volumes)
 _places_cb_mouse_down(void *data, Evas *evas, Evas_Object *obj, void *event)
 {
    Instance *inst = NULL;

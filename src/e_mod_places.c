@@ -241,6 +241,8 @@ places_fill_box(Evas_Object *main, Eina_Bool horiz)
    char *f1, *f2, *f3;
    char buf[128];
 
+   if (!main) return;
+
    places_empty_box(main);
 
    /*if (places_conf->show_home)
@@ -278,7 +280,7 @@ places_fill_box(Evas_Object *main, Eina_Bool horiz)
    edje_object_size_max_get(o, &max_w, &max_h);
    evas_object_size_hint_min_set(o, min_w, min_h);
    evas_object_size_hint_max_set(o, max_w, max_h);
-   evas_object_size_hint_align_set(o, EVAS_HINT_FILL, EVAS_HINT_FILL);
+   // evas_object_size_hint_align_set(o, EVAS_HINT_FILL, 0.0);
    edje_object_part_box_append(main, "box", o);
    evas_object_show(o);
 
@@ -386,10 +388,16 @@ places_fill_box(Evas_Object *main, Eina_Bool horiz)
         edje_object_size_max_get(o, &max_w, &max_h);
         evas_object_size_hint_min_set(o, min_w, min_h);
         evas_object_size_hint_max_set(o, max_w, max_h);
-        evas_object_size_hint_align_set(o, EVAS_HINT_FILL, EVAS_HINT_FILL);
+        // evas_object_size_hint_align_set(o, EVAS_HINT_FILL, 0.0);
+        // evas_object_size_hint_weight_set(o, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
         edje_object_part_box_append(main, "box", o);
         evas_object_show(o);
      }
+
+   edje_object_calc_force(main);
+   edje_object_size_min_restricted_calc(main, &min_w, &min_h, 99, 1);
+   // printf("PLACES: SIZE: %d %d\n", min_w, min_h);
+   evas_object_size_hint_min_set(main, min_w, min_h);
 }
 
 void

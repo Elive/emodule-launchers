@@ -55,6 +55,8 @@ struct _Instance
 {
    E_Gadcon_Client *gcc;
    Evas_Object *o_main;
+   Evas_Object *o_icon;
+   E_Gadcon_Popup *popup;
    Eina_Bool horiz;
    E_Menu *menu;
    Config_Item *conf_item;
