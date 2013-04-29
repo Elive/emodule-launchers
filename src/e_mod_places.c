@@ -19,7 +19,7 @@
 static Eina_Bool _places_poller(void *data);
 static const char *_places_human_size_get(unsigned long long size);
 static void _places_volume_object_update(Volume *vol, Evas_Object *obj);
-static void _places_run_fm(const char *directory);
+static void _places_run_fm_external(const char *fm, const char *directory);
 
 /* Edje callbacks */
 void _places_icon_activated_cb(void *data, Evas_Object *o, const char *emission, const char *source);
@@ -225,7 +225,7 @@ places_volume_update(Volume *vol)
    // the volume has been mounted as requested, open the fm
    if (vol->force_open && vol->mounted && vol->mount_point)
    {
-      _places_run_fm(vol->mount_point);
+      places_run_fm(vol->mount_point);
       vol->force_open = EINA_FALSE;
    }
 
@@ -488,6 +488,31 @@ places_print_volume(Volume *v)
    printf("\n");
 }
 
+void
+places_run_fm(const char *directory)
+{
+   if (places_conf->fm && places_conf->fm[0])
+     {
+        _places_run_fm_external(places_conf->fm, directory);
+     }
+   else
+     {
+        E_Action *act = e_action_find("fileman");
+        Eina_List *managers = e_manager_list();
+
+        if (act && act->func.go && managers && managers->data)
+          act->func.go(E_OBJECT(managers->data), directory);
+        else
+          e_util_dialog_internal(D_("Warning"),
+                      D_("<b>Cannot run the Enlightenment FileManager.</b><br>"
+                         "Please choose a custom file manager in<br>"
+                         "the gadget configuration."));
+     }
+
+   if (places_conf->autoclose_popup)
+      places_popups_close();
+}
+
 void /* work in progrees */
 _places_custom_volume(Evas_Object *box, const char *label, const char *icon, const char *uri)
 {
@@ -613,31 +638,6 @@ _places_run_fm_external(const char *fm, const char *directory)
 }
 
 static void
-_places_run_fm(const char *directory)
-{
-   if (places_conf->fm && places_conf->fm[0])
-     {
-        _places_run_fm_external(places_conf->fm, directory);
-     }
-   else
-     {
-        E_Action *act = e_action_find("fileman");
-        Eina_List *managers = e_manager_list();
-
-        if (act && act->func.go && managers && managers->data)
-          act->func.go(E_OBJECT(managers->data), directory);
-        else
-          e_util_dialog_internal(D_("Warning"),
-                      D_("<b>Cannot run the Enlightenment FileManager.</b><br>"
-                         "Please choose a custom file manager in<br>"
-                         "the gadget configuration."));
-     }
-
-   if (places_conf->autoclose_popup)
-      places_popups_close();
-}
-
-static void
 _places_volume_object_update(Volume *vol, Evas_Object *obj)
 {
    const char *tot_h;
@@ -712,7 +712,7 @@ _places_icon_activated_cb(void *data, Evas_Object *o, const char *emission, cons
    Volume *vol = data;
 
    if (vol->mounted)
-     _places_run_fm(vol->mount_point);
+     places_run_fm(vol->mount_point);
    else
      {
         vol->force_open = EINA_TRUE;
@@ -723,7 +723,7 @@ _places_icon_activated_cb(void *data, Evas_Object *o, const char *emission, cons
 void // work in progress
 _places_custom_icon_activated_cb(void *data, Evas_Object *o, const char *emission, const char *source)
 {
-   _places_run_fm((const char*)data);
+   places_run_fm((const char*)data);
 }
 
 void
@@ -740,7 +740,7 @@ _places_eject_activated_cb(void *data, Evas_Object *o, const char *emission, con
 void
 _places_header_activated_cb(void *data, Evas_Object *o, const char *emission, const char *source)
 {
-   _places_run_fm(e_user_homedir_get());
+   places_run_fm(e_user_homedir_get());
 }
 
 
@@ -748,7 +748,7 @@ _places_header_activated_cb(void *data, Evas_Object *o, const char *emission, co
 void
 _places_menu_cb(void *data, E_Menu *m, E_Menu_Item *mi)
 {
-   _places_run_fm(data);
+   places_run_fm(data);
 }
 
 static void

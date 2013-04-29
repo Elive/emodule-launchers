@@ -65,6 +65,7 @@ void places_print_volume(Volume *v);
 
 void places_generate_menu(void *data, E_Menu *em);
 void places_augmentation(void *data, E_Menu *em);
+void places_run_fm(const char *directory);
 
 
 #endif

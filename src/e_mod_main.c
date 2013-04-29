@@ -511,6 +511,8 @@ _places_icon_cb_mouse_down(void *data, Evas *evas, Evas_Object *obj, void *event
       else
          _places_popup_del(inst);
    }
+   else if (ev->button == 2)
+     places_run_fm(e_user_homedir_get());
    else if (ev->button == 3)
      _places_cb_mouse_down(inst, evas, obj, event);
 }
