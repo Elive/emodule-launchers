@@ -19,7 +19,7 @@
 static Eina_Bool _places_poller(void *data);
 static const char *_places_human_size_get(unsigned long long size);
 static void _places_volume_object_update(Volume *vol, Evas_Object *obj);
-static void _places_run_fm(void *data, E_Menu *m, E_Menu_Item *mi);
+static void _places_run_fm(const char *directory);
 
 /* Edje callbacks */
 void _places_icon_activated_cb(void *data, Evas_Object *o, const char *emission, const char *source);
@@ -110,8 +110,6 @@ places_volume_add(const char *id, Eina_Bool first_time)
    v->label = eina_stringshare_add("");
    v->mount_point = eina_stringshare_add("");
    v->fstype = eina_stringshare_add("");
-   v->to_mount = EINA_FALSE;
-   v->force_open = EINA_FALSE;
    v->drive_type = eina_stringshare_add("");
    v->model = eina_stringshare_add("");
    v->serial = eina_stringshare_add("");
@@ -227,7 +225,7 @@ places_volume_update(Volume *vol)
    // the volume has been mounted as requested, open the fm
    if (vol->force_open && vol->mounted && vol->mount_point)
    {
-      _places_run_fm((void*)vol->mount_point,NULL, NULL);
+      _places_run_fm(vol->mount_point);
       vol->force_open = EINA_FALSE;
    }
 }
@@ -612,14 +610,17 @@ _places_run_fm_external(const char *fm, const char *directory)
 }
 
 static void
-_places_run_fm(void *data, E_Menu *m, E_Menu_Item *mi)
+_places_run_fm(const char *directory)
 {
-   const char *directory = data;
-
+   // TODO close the popup if any...but I miss inst here :/
+   // if (!m && inst->popup && places_conf->autoclose_popup)
+   // {
+      // e_object_del(E_OBJECT(inst->popup));
+   // }
+   
    if (places_conf->fm && places_conf->fm[0])
      {
         _places_run_fm_external(places_conf->fm, directory);
-        return;
      }
    else
      {
@@ -711,7 +712,7 @@ _places_icon_activated_cb(void *data, Evas_Object *o, const char *emission, cons
    Volume *vol = data;
 
    if (vol->mounted)
-     _places_run_fm((void*)vol->mount_point, NULL, NULL);
+     _places_run_fm((void*)vol->mount_point);
    else
      {
         vol->force_open = EINA_TRUE;
@@ -722,8 +723,7 @@ _places_icon_activated_cb(void *data, Evas_Object *o, const char *emission, cons
 void // work in progress
 _places_custom_icon_activated_cb(void *data, Evas_Object *o, const char *emission, const char *source)
 {
-   //data is char *uri
-   _places_run_fm(data, NULL, NULL);
+   _places_run_fm((const char*)data);
 }
 
 void
@@ -740,11 +740,17 @@ _places_eject_activated_cb(void *data, Evas_Object *o, const char *emission, con
 void
 _places_header_activated_cb(void *data, Evas_Object *o, const char *emission, const char *source)
 {
-   _places_run_fm((char*)e_user_homedir_get(), NULL, NULL);
+   _places_run_fm(e_user_homedir_get());
 }
 
 
 /* E17 menu augmentation */
+void
+_places_menu_cb(void *data, E_Menu *m, E_Menu_Item *mi)
+{
+   _places_run_fm((const char*) data);
+}
+
 static void
 _places_bookmarks_parse(E_Menu *em)
 {
@@ -770,28 +776,19 @@ _places_bookmarks_parse(E_Menu *em)
                   alias++;
                }
              uri = efreet_uri_decode(line);
-             if (uri && uri->path)
+             if (uri && uri->path && ecore_file_exists(uri->path))
                {
-                  if (ecore_file_exists(uri->path))
-                    {
-                       mi = e_menu_item_new(em);
-                       e_menu_item_label_set(mi, alias ? alias :
-                                             ecore_file_file_get(uri->path));
-                       e_util_menu_item_theme_icon_set(mi, "folder");
-                       e_menu_item_callback_set(mi, _places_run_fm,
-                                                strdup(uri->path)); //TODO free somewhere
-                    }
+                  mi = e_menu_item_new(em);
+                  e_menu_item_label_set(mi, alias ? alias :
+                                        ecore_file_file_get(uri->path));
+                  e_util_menu_item_theme_icon_set(mi, "folder");
+                  e_menu_item_callback_set(mi, _places_menu_cb,
+                                           strdup(uri->path)); //TODO free somewhere
                }
              if (uri) efreet_uri_free(uri);
           }
         fclose(fp);
      }
-}
-
-void
-places_menu_click_cb(void *data, E_Menu *m, E_Menu_Item *mi)
-{
-   _places_icon_activated_cb(data, NULL, NULL, NULL);
 }
 
 void
@@ -806,7 +803,7 @@ places_generate_menu(void *data, E_Menu *em)
         mi = e_menu_item_new(em);
         e_menu_item_label_set(mi, D_("Home"));
         e_util_menu_item_theme_icon_set(mi, "user-home");
-        e_menu_item_callback_set(mi, _places_run_fm, (char*)e_user_homedir_get());
+        e_menu_item_callback_set(mi, _places_menu_cb, (char*)e_user_homedir_get());
      }
 
    // Desktop
@@ -816,7 +813,7 @@ places_generate_menu(void *data, E_Menu *em)
         e_menu_item_label_set(mi, D_("Desktop"));
         e_util_menu_item_theme_icon_set(mi, "user-desktop");
         snprintf(buf, sizeof(buf), "%s/Desktop", (char*)e_user_homedir_get());
-        e_menu_item_callback_set(mi, _places_run_fm, strdup(buf)); //TODO free somewhere
+        e_menu_item_callback_set(mi, _places_menu_cb, strdup(buf)); //TODO free somewhere
      }
 
    // Trash
@@ -825,7 +822,7 @@ places_generate_menu(void *data, E_Menu *em)
         mi = e_menu_item_new(em);
         e_menu_item_label_set(mi, D_("Trash"));
         e_util_menu_item_theme_icon_set(mi, "user-trash");
-        e_menu_item_callback_set(mi, _places_run_fm, "trash:///");
+        e_menu_item_callback_set(mi, _places_menu_cb, "trash:///");
      }
 
    // File System
@@ -834,7 +831,7 @@ places_generate_menu(void *data, E_Menu *em)
         mi = e_menu_item_new(em);
         e_menu_item_label_set(mi, D_("Filesystem"));
         e_util_menu_item_theme_icon_set(mi, "drive-harddisk");
-        e_menu_item_callback_set(mi, _places_run_fm, "/");
+        e_menu_item_callback_set(mi, _places_menu_cb, "/");
      }
 
    // Temp
@@ -843,7 +840,7 @@ places_generate_menu(void *data, E_Menu *em)
         mi = e_menu_item_new(em);
         e_menu_item_label_set(mi, D_("Temp"));
         e_util_menu_item_theme_icon_set(mi, "user-temp");
-        e_menu_item_callback_set(mi, _places_run_fm, "/tmp");
+        e_menu_item_callback_set(mi, _places_menu_cb, "/tmp");
      }
 
    // Separator
@@ -873,7 +870,7 @@ places_generate_menu(void *data, E_Menu *em)
         if (vol->icon)
           e_util_menu_item_theme_icon_set(mi, vol->icon);
 
-        e_menu_item_callback_set(mi, places_menu_click_cb, vol);
+        e_menu_item_callback_set(mi, _places_menu_cb, vol);
         volumes_visible = 1;
      }
 

@@ -13,6 +13,7 @@ struct _E_Config_Dialog_Data
    Evas_Object *entry;
    int show_menu;
    int hide_header;
+   int autoclose_popup;
    int show_home;
    int show_desk;
    int show_trash;
@@ -86,6 +87,7 @@ _fill_data(E_Config_Dialog_Data *cfdata)
 
    cfdata->show_menu = places_conf->show_menu;
    cfdata->hide_header = places_conf->hide_header;
+   cfdata->autoclose_popup = places_conf->autoclose_popup;
    cfdata->show_home = places_conf->show_home;
    cfdata->show_desk = places_conf->show_desk;
    cfdata->show_trash = places_conf->show_trash;
@@ -142,6 +144,10 @@ _basic_create(E_Config_Dialog *cfd, Evas *evas, E_Config_Dialog_Data *cfdata)
 
    ow = e_widget_check_add(evas, D_("Hide the gadget header"),
                            &(cfdata->hide_header));
+   e_widget_framelist_object_append(of, ow);
+
+   ow = e_widget_check_add(evas, D_("Auto close the popup"),
+                           &(cfdata->autoclose_popup));
    e_widget_framelist_object_append(of, ow);
 
    ow = e_widget_check_add(evas, D_("Mount volumes at boot"),
@@ -203,6 +209,7 @@ _basic_apply(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata)
 {
    places_conf->show_menu = cfdata->show_menu;
    places_conf->hide_header = cfdata->hide_header;
+   places_conf->autoclose_popup = cfdata->autoclose_popup;
    places_conf->auto_mount = cfdata->auto_mount;
    places_conf->boot_mount = cfdata->boot_mount;
    places_conf->auto_open = cfdata->auto_open;

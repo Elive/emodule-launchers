@@ -12,7 +12,7 @@
 
 /* Macros used for config file versioning */
 #define MOD_CONFIG_FILE_EPOCH 0x0001
-#define MOD_CONFIG_FILE_GENERATION 0x008f
+#define MOD_CONFIG_FILE_GENERATION 0x0090
 #define MOD_CONFIG_FILE_VERSION \
    ((MOD_CONFIG_FILE_EPOCH << 16) | MOD_CONFIG_FILE_GENERATION)
 
@@ -28,18 +28,19 @@ struct _Config
    int version;
 
    const char *fm;
-   unsigned char auto_mount;
-   unsigned char boot_mount;
-   unsigned char auto_open;
-   unsigned char show_menu;
-   unsigned char hide_header;
+   Eina_Bool auto_mount;
+   Eina_Bool boot_mount;
+   Eina_Bool auto_open;
+   Eina_Bool show_menu;
+   Eina_Bool hide_header;
+   Eina_Bool autoclose_popup;
 
-   unsigned char show_home;
-   unsigned char show_desk;
-   unsigned char show_trash;
-   unsigned char show_root;
-   unsigned char show_temp;
-   unsigned char show_bookm;
+   Eina_Bool show_home;
+   Eina_Bool show_desk;
+   Eina_Bool show_trash;
+   Eina_Bool show_root;
+   Eina_Bool show_temp;
+   Eina_Bool show_bookm;
 };
 
 typedef struct _Config_Item Config_Item;

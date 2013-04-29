@@ -83,6 +83,7 @@ e_modapi_init(E_Module *m)
    E_CONFIG_LIST(D, T, conf_items, conf_item_edd);
    E_CONFIG_VAL(D, T, show_menu, UCHAR);
    E_CONFIG_VAL(D, T, hide_header, UCHAR);
+   E_CONFIG_VAL(D, T, autoclose_popup, UCHAR);
    E_CONFIG_VAL(D, T, show_home, UCHAR);
    E_CONFIG_VAL(D, T, show_desk, UCHAR);
    E_CONFIG_VAL(D, T, show_trash, UCHAR);
@@ -247,6 +248,19 @@ _gc_shutdown(E_Gadcon_Client *gcc)
                                        _places_cb_mouse_down);
         places_empty_box(inst->o_main);
         evas_object_del(inst->o_main);
+        inst->o_main = NULL;
+     }
+
+   if (inst->popup)
+     {
+        e_object_del(E_OBJECT(inst->popup));
+        inst->popup = NULL;
+     }
+
+   if (inst->o_icon)
+     {
+        evas_object_del(inst->o_icon);
+        inst->o_icon = NULL;
      }
 
    E_FREE(inst);
@@ -351,6 +365,7 @@ _places_conf_new(void)
    places_conf->auto_open = 0;
    places_conf->show_home = 1;
    places_conf->hide_header = 0;
+   places_conf->autoclose_popup = 0;
    places_conf->show_desk = 1;
    places_conf->show_trash = 0;
    places_conf->show_root = 0;
@@ -428,9 +443,13 @@ _places_popup_del_cb(Evas_Object *obj)
    inst = e_object_data_get(E_OBJECT(obj));
    if (!inst) return;
 
-   places_empty_box(inst->o_main);
-   evas_object_del(inst->o_main);
-   inst->o_main = NULL;
+   if (inst->o_main)
+   {
+      places_empty_box(inst->o_main);
+      evas_object_del(inst->o_main);
+      inst->o_main = NULL;
+   }
+   
    inst->popup = NULL;
 }
 
@@ -445,7 +464,7 @@ _places_popup_new(Instance *inst)
 
    // create the popup
    popup = e_gadcon_popup_new(inst->gcc);
-   if (0) // TODO make popup_autoclose an option (and close when volume selected?)
+   if (places_conf->autoclose_popup)
      e_popup_autoclose(popup->win, NULL, NULL);
    e_object_data_set(E_OBJECT(popup), inst);
    E_OBJECT_DEL_SET(popup, _places_popup_del_cb);
