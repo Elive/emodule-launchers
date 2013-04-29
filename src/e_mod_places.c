@@ -712,7 +712,7 @@ _places_icon_activated_cb(void *data, Evas_Object *o, const char *emission, cons
    Volume *vol = data;
 
    if (vol->mounted)
-     _places_run_fm((void*)vol->mount_point);
+     _places_run_fm(vol->mount_point);
    else
      {
         vol->force_open = EINA_TRUE;
@@ -748,7 +748,7 @@ _places_header_activated_cb(void *data, Evas_Object *o, const char *emission, co
 void
 _places_menu_cb(void *data, E_Menu *m, E_Menu_Item *mi)
 {
-   _places_run_fm((const char*) data);
+   _places_run_fm(data);
 }
 
 static void
@@ -795,7 +795,6 @@ void
 places_generate_menu(void *data, E_Menu *em)
 {
    E_Menu_Item *mi;
-   char buf[PATH_MAX];
 
    // Home
    if (places_conf->show_home)
@@ -803,7 +802,7 @@ places_generate_menu(void *data, E_Menu *em)
         mi = e_menu_item_new(em);
         e_menu_item_label_set(mi, D_("Home"));
         e_util_menu_item_theme_icon_set(mi, "user-home");
-        e_menu_item_callback_set(mi, _places_menu_cb, (char*)e_user_homedir_get());
+        e_menu_item_callback_set(mi, _places_menu_cb, e_user_homedir_get());
      }
 
    // Desktop
@@ -812,8 +811,7 @@ places_generate_menu(void *data, E_Menu *em)
         mi = e_menu_item_new(em);
         e_menu_item_label_set(mi, D_("Desktop"));
         e_util_menu_item_theme_icon_set(mi, "user-desktop");
-        snprintf(buf, sizeof(buf), "%s/Desktop", (char*)e_user_homedir_get());
-        e_menu_item_callback_set(mi, _places_menu_cb, strdup(buf)); //TODO free somewhere
+        e_menu_item_callback_set(mi, _places_menu_cb, efreet_desktop_dir_get());
      }
 
    // Trash
@@ -870,7 +868,7 @@ places_generate_menu(void *data, E_Menu *em)
         if (vol->icon)
           e_util_menu_item_theme_icon_set(mi, vol->icon);
 
-        e_menu_item_callback_set(mi, _places_menu_cb, vol);
+        e_menu_item_callback_set(mi, _places_menu_cb, vol->mount_point);
         volumes_visible = 1;
      }
 
