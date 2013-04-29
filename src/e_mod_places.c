@@ -228,6 +228,9 @@ places_volume_update(Volume *vol)
       _places_run_fm(vol->mount_point);
       vol->force_open = EINA_FALSE;
    }
+
+   // debug:
+   // places_print_volume(vol);
 }
 
 void

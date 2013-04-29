@@ -294,7 +294,7 @@ _places_udisks_vol_props_cb(void *data, const EDBus_Message *msg, EDBus_Pending 
    else if (mount_point && mount_point[0])
       eina_stringshare_replace(&vol->label, mount_point);
    else if (device && device[0])
-      eina_stringshare_replace(&vol->label, vol->device);
+      eina_stringshare_replace(&vol->label, device);
 
    // store all other props in the Volume*
    if (device) eina_stringshare_replace(&vol->device, device);
