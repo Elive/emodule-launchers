@@ -183,6 +183,20 @@ e_modapi_save(E_Module *m)
 }
 
 void
+places_popups_close(void)
+{
+   Eina_List *l;
+   Instance *inst;
+
+   EINA_LIST_FOREACH(instances, l, inst)
+     if (inst->popup)
+       {
+          e_object_del(E_OBJECT(inst->popup));
+          inst->popup = NULL;
+       }
+}
+
+void
 places_menu_augmentation(void)
 {
    if (places_conf->show_menu && (!maug))

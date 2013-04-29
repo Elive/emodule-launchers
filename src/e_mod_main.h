@@ -71,6 +71,7 @@ EAPI int e_modapi_save(E_Module *m);
 
 E_Config_Dialog *e_int_config_places_module(E_Container *con, const char *params);
 void places_menu_augmentation(void);
+void places_popups_close(void);
 
 extern Config *places_conf;
 extern Eina_List *instances;

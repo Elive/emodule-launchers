@@ -615,12 +615,6 @@ _places_run_fm_external(const char *fm, const char *directory)
 static void
 _places_run_fm(const char *directory)
 {
-   // TODO close the popup if any...but I miss inst here :/
-   // if (!m && inst->popup && places_conf->autoclose_popup)
-   // {
-      // e_object_del(E_OBJECT(inst->popup));
-   // }
-   
    if (places_conf->fm && places_conf->fm[0])
      {
         _places_run_fm_external(places_conf->fm, directory);
@@ -638,6 +632,9 @@ _places_run_fm(const char *directory)
                          "Please choose a custom file manager in<br>"
                          "the gadget configuration."));
      }
+
+   if (places_conf->autoclose_popup)
+      places_popups_close();
 }
 
 static void
