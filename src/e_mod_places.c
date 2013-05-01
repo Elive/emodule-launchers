@@ -11,8 +11,8 @@
 #ifdef HAVE_EEZE
 # include "e_mod_eeze.h"
 #endif
-#ifdef HAVE_EDBUS2
-# include "e_mod_udisks_edbus2.h"
+#ifdef HAVE_ELDBUS
+# include "e_mod_udisks_eldbus.h"
 #endif
 
 /* Local Function Prototypes */
@@ -47,8 +47,8 @@ places_init(void)
 #ifdef HAVE_EEZE
    places_eeze_init();
 #endif
-#ifdef HAVE_EDBUS2
-   places_udisks_edbus2_init();
+#ifdef HAVE_ELDBUS
+   places_udisks_eldbus_init();
 #endif
 
    snprintf(theme_file, PATH_MAX, "%s/e-module-places.edj",
@@ -70,8 +70,8 @@ places_shutdown(void)
 #ifdef HAVE_EEZE
    places_eeze_shutdown();
 #endif
-#ifdef HAVE_EDBUS2
-   places_udisks_edbus2_shutdown();
+#ifdef HAVE_ELDBUS
+   places_udisks_eldbus_shutdown();
 #endif
 }
 

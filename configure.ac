@@ -70,15 +70,15 @@ if test "x$want_udisks" = "xno";then
    have_udisks=no
 fi
 
-# check for edbus v2 (default enabled)
-PKG_CHECK_MODULES([EDBUS2], [edbus2 >= 1.7.99],
-                  [have_edbus2="yes"], [have_edbus2="no"])
-want_edbus2=yes
-AC_ARG_ENABLE([edbus2],
-   AS_HELP_STRING([--enable-edbus2],[enable UDisks with edbus2 support @<:@default=enabled@:>@]), 
-   [want_edbus2=$enableval])
-if test "x$want_edbus2" = "xno";then
-   have_edbus2=no
+# check for eldbus v2 (default enabled)
+PKG_CHECK_MODULES([ELDBUS], [eldbus >= 1.7.99],
+                  [have_eldbus="yes"], [have_eldbus="no"])
+want_eldbus=yes
+AC_ARG_ENABLE([eldbus],
+   AS_HELP_STRING([--enable-eldbus],[enable UDisks with eldbus support @<:@default=enabled@:>@]), 
+   [want_eldbus=$enableval])
+if test "x$want_eldbus" = "xno";then
+   have_eldbus=no
 fi
 
 # check for eeze (default disabled)
@@ -93,12 +93,12 @@ if test "x$want_eeze" != "xyes";then
 fi
 
 # do not use both e_dbus and eldbus
-if test "x$have_edbus2" = "xyes";then
+if test "x$have_eldbus" = "xyes";then
    have_udisks=no
 fi
 
-AM_CONDITIONAL([HAVE_EDBUS2], [test "x$have_edbus2" = "xyes"])
-test "x$have_edbus2" = "xyes" && AC_DEFINE_UNQUOTED([HAVE_EDBUS2], [1], [enable edbus2 support])
+AM_CONDITIONAL([HAVE_ELDBUS], [test "x$have_eldbus" = "xyes"])
+test "x$have_eldbus" = "xyes" && AC_DEFINE_UNQUOTED([HAVE_ELDBUS], [1], [enable eldbus support])
 
 AM_CONDITIONAL([HAVE_UDISKS], [test "x$have_udisks" = "xyes"])
 test "x$have_udisks" = "xyes" && AC_DEFINE_UNQUOTED([HAVE_UDISKS], [1], [enable Udisks support])
@@ -141,8 +141,8 @@ SUMMARY_EOF
 echo
 cat << DEVICE_EOF
 Device Backends:
- * build udisks (e_dbus v1)....: $have_udisks (deprecated)
- * build udisks (edbus  v2)....: $have_edbus2 (suggested)
- * build eeze..................: $have_eeze (experimental)
+ * build udisks (e_dbus)....: $have_udisks (deprecated)
+ * build udisks (eldbus)....: $have_eldbus (suggested)
+ * build eeze...............: $have_eeze (experimental)
 DEVICE_EOF
 echo
