@@ -479,7 +479,7 @@ _places_popup_new(Instance *inst)
    // create the popup
    popup = e_gadcon_popup_new(inst->gcc);
    if (places_conf->autoclose_popup)
-     e_popup_autoclose(popup->win, NULL, NULL);
+     e_popup_autoclose(popup->win, NULL, NULL, NULL);
    e_object_data_set(E_OBJECT(popup), inst);
    E_OBJECT_DEL_SET(popup, _places_popup_del_cb);
    inst->popup = popup;
