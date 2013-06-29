@@ -37,7 +37,7 @@ AM_CONDITIONAL([HAVE_PO], [false])
 AC_SUBST(LTLIBINTL)
 
 # check for Enlightenment
-PKG_CHECK_MODULES(E, [enlightenment])
+PKG_CHECK_MODULES(E, [enlightenment < 0.17.99])
 release=$(pkg-config --variable=release enlightenment)
 MODULE_ARCH="$host_os-$host_cpu-$release"
 AC_SUBST(MODULE_ARCH)
