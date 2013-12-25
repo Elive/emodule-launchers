@@ -8,131 +8,132 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-04-14 18:28+0200\n"
-"PO-Revision-Date: 2009-11-11 20:49+0000\n"
-"Last-Translator: lisovszki <lisovszki@gmail.com>\n"
+"POT-Creation-Date: 2013-12-25 15:48+0100\n"
+"PO-Revision-Date: 2013-12-25 17:07+0100\n"
+"Last-Translator: rezso <rezso@rezso.net>\n"
 "Language-Team: Hungarian <pclinuxos-i18n@googlegroups.com>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2009-11-12 04:54+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
-"X-Poedit-Country: FRANCE\n"
-"X-Poedit-Language: French\n"
+"X-Generator: Poedit 1.5.5\n"
 
-#: src/e_mod_config.c:54
+#. create new config dialog
+#: ../src/e_mod_config.c:55
 msgid "Places Settings"
-msgstr ""
+msgstr "Helyek beállításai"
 
-#: src/e_mod_config.c:136
+#. General frame
+#: ../src/e_mod_config.c:138
 msgid "General"
 msgstr "Általános"
 
-#: src/e_mod_config.c:139
+#: ../src/e_mod_config.c:141
 msgid "Show in main menu"
 msgstr "Megjelenítés a főmeüben"
 
-#: src/e_mod_config.c:143
+#: ../src/e_mod_config.c:145
 msgid "Hide the gadget header"
-msgstr ""
+msgstr "A gadget fejlécének elrejtése"
 
-#: src/e_mod_config.c:147
-#, fuzzy
+#: ../src/e_mod_config.c:149
+msgid "Auto close the popup"
+msgstr "Felugró ablak automatikus bezárása"
+
+#: ../src/e_mod_config.c:153
 msgid "Mount volumes at boot"
-msgstr "Eszközök felcsatolása csatlakoztatáskor"
+msgstr "Kötetek automatikus felcsatolása induláskor"
 
-#: src/e_mod_config.c:151
+#: ../src/e_mod_config.c:157
 msgid "Mount volumes on insert"
 msgstr "Eszközök felcsatolása csatlakoztatáskor"
 
-#: src/e_mod_config.c:155
+#: ../src/e_mod_config.c:161
 msgid "Open filemanager on insert"
 msgstr "Fájlkezelő megnyitása felcsatoláskor"
 
-#: src/e_mod_config.c:162
+#: ../src/e_mod_config.c:168
 msgid "Use a custom file manager"
 msgstr "Egyedi fájlkezelő használata"
 
-#: src/e_mod_config.c:175
+#. Display frame
+#: ../src/e_mod_config.c:181
 msgid "Show in menu"
 msgstr "Megjelenítés a menüben"
 
-#: src/e_mod_config.c:178 src/e_mod_places.c:774
+#: ../src/e_mod_config.c:184 ../src/e_mod_places.c:803
 msgid "Home"
 msgstr "Saját könyvtár"
 
-#: src/e_mod_config.c:181 src/e_mod_places.c:783
+#: ../src/e_mod_config.c:187 ../src/e_mod_places.c:812
 msgid "Desktop"
 msgstr "Munkaasztal"
 
-#: src/e_mod_config.c:184 src/e_mod_places.c:793
+#: ../src/e_mod_config.c:190 ../src/e_mod_places.c:821
 msgid "Trash"
 msgstr "Szemétkosár"
 
-#: src/e_mod_config.c:187 src/e_mod_places.c:618 src/e_mod_places.c:802
+#: ../src/e_mod_config.c:193 ../src/e_mod_places.c:652
+#: ../src/e_mod_places.c:830
 msgid "Filesystem"
 msgstr "Fájlrendszer"
 
-#: src/e_mod_config.c:190 src/e_mod_places.c:811
+#: ../src/e_mod_config.c:196 ../src/e_mod_places.c:839
 msgid "Temp"
 msgstr "Átmeneti"
 
-#: src/e_mod_config.c:193
+#: ../src/e_mod_config.c:199
 msgid "Favorites"
 msgstr "Kedvencek"
 
-#: src/e_mod_main.c:59
+#. Display this Modules config info in the main Config Panel
+#: ../src/e_mod_main.c:59
 msgid "Files"
 msgstr "Fájlok"
 
-#: src/e_mod_main.c:61 src/e_mod_main.c:298 src/e_mod_places.c:236
-#: src/e_mod_places.c:868
+#: ../src/e_mod_main.c:61 ../src/e_mod_main.c:329 ../src/e_mod_places.c:274
+#: ../src/e_mod_places.c:896
 msgid "Places"
 msgstr "Helyek"
 
-#: src/e_mod_main.c:394
-#, fuzzy
+#: ../src/e_mod_main.c:426
 msgid "Places Configuration Updated"
+msgstr "A modul beállításai frissítésre kerültek."
+
+#: ../src/e_mod_main.c:542
+msgid "Settings"
 msgstr "Beállítások"
 
-#: src/e_mod_main.c:434
-msgid "Settings"
-msgstr ""
-
-#: src/e_mod_places.c:599
+#: ../src/e_mod_places.c:506
 msgid "Warning"
-msgstr ""
+msgstr "Figyelmeztetés"
 
-#: src/e_mod_places.c:600
+#: ../src/e_mod_places.c:507
 msgid ""
 "<b>Cannot run the Enlightenment FileManager.</b><br>Please choose a custom "
 "file manager in<br>the gadget configuration."
 msgstr ""
+"<b>Az Enlightenment FileManager nem futtatható.</b><br>Válassz egy másik "
+"fájlkezelőt<br>a beállításoknál."
 
-#: src/e_mod_places.c:622
+#: ../src/e_mod_places.c:656
 msgid "No Name"
 msgstr "Nincs név"
 
-#: src/e_mod_places.c:629
+#: ../src/e_mod_places.c:663
 msgid "free of"
 msgstr "szabad hely"
 
-#: src/e_mod_places.c:635
+#: ../src/e_mod_places.c:669
 #, c-format
 msgid "%s Not Mounted"
 msgstr "%s nincs felcsatolva"
 
-#: src/e_mod_places.c:662
+#: ../src/e_mod_places.c:696
 msgid "unmount"
 msgstr "leválasztás"
 
-#: src/e_mod_places.c:667
+#: ../src/e_mod_places.c:701
 msgid "eject"
 msgstr "kiadás"
-
-#~ msgid "Configuration"
-#~ msgstr "Beállítás"
-
-#~ msgid "File manager (if blank uses Enlightenment)"
-#~ msgstr "Fájlkezelő (ha üres, akkor az e17 fájlkezelőjét használja)"
