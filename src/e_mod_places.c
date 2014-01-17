@@ -5,9 +5,6 @@
 #include <sys/statvfs.h>
 #include "e_mod_main.h"
 #include "e_mod_places.h"
-#ifdef HAVE_UDISKS
-# include "e_mod_udisks.h"
-#endif
 #ifdef HAVE_EEZE
 # include "e_mod_eeze.h"
 #endif
@@ -41,9 +38,6 @@ places_init(void)
 
    printf("PLACES: Init\n");
 
-#ifdef HAVE_UDISKS
-   places_udisks_init();
-#endif
 #ifdef HAVE_EEZE
    places_eeze_init();
 #endif
@@ -64,9 +58,6 @@ places_shutdown(void)
    while (volumes)
      places_volume_del((Volume*)volumes->data);
 
-#ifdef HAVE_UDISKS
-   places_udisks_shutdown();
-#endif
 #ifdef HAVE_EEZE
    places_eeze_shutdown();
 #endif
