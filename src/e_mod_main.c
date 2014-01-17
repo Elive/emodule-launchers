@@ -477,15 +477,15 @@ _places_popup_new(Instance *inst)
       return;
 
    // create the popup
-   popup = e_gadcon_popup_new(inst->gcc);
+   popup = e_gadcon_popup_new(inst->gcc, EINA_FALSE);
    if (places_conf->autoclose_popup)
-     e_popup_autoclose(popup->win, NULL, NULL, NULL);
+     e_comp_object_util_autoclose(popup->comp_object, NULL, NULL, NULL);
    e_object_data_set(E_OBJECT(popup), inst);
    E_OBJECT_DEL_SET(popup, _places_popup_del_cb);
    inst->popup = popup;
 
    // build and fill the main edje object
-   inst->o_main = places_main_obj_create(popup->win->evas);
+   inst->o_main = places_main_obj_create(e_comp_get(popup)->evas);
    evas_object_event_callback_add(inst->o_main, EVAS_CALLBACK_MOUSE_DOWN,
                                   _places_cb_mouse_down, inst);
    places_fill_box(inst->o_main, EINA_FALSE);
@@ -576,5 +576,5 @@ _places_cb_menu_configure(void *data, E_Menu *mn, E_Menu_Item *mi)
 {
    if (!places_conf) return;
    if (places_conf->cfd) return;
-   e_int_config_places_module(mn->zone->container, NULL);
+   e_int_config_places_module(mn->zone->comp, NULL);
 }

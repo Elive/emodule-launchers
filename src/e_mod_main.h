@@ -69,7 +69,7 @@ EAPI void *e_modapi_init(E_Module *m);
 EAPI int e_modapi_shutdown(E_Module *m);
 EAPI int e_modapi_save(E_Module *m);
 
-E_Config_Dialog *e_int_config_places_module(E_Container *con, const char *params);
+E_Config_Dialog *e_int_config_places_module(E_Comp *comp, const char *params);
 void places_menu_augmentation(void);
 void places_popups_close(void);
 
