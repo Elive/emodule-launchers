@@ -183,20 +183,6 @@ e_modapi_save(E_Module *m)
 }
 
 void
-places_popups_close(void)
-{
-   Eina_List *l;
-   Instance *inst;
-
-   EINA_LIST_FOREACH(instances, l, inst)
-     if (inst->popup)
-       {
-          e_object_del(E_OBJECT(inst->popup));
-          inst->popup = NULL;
-       }
-}
-
-void
 places_menu_augmentation(void)
 {
    if (places_conf->show_menu && (!maug))
@@ -443,10 +429,11 @@ _places_conf_item_get(const char *id)
 
 /* popup */
 static void
-_places_popup_del(Instance *inst)
+_places_popup_del(void *data, Evas_Object *obj EINA_UNUSED)
 {
-   if (inst->popup)
-     e_object_del(E_OBJECT(inst->popup));
+   Instance *inst = data;
+
+   E_FREE_FUNC(inst->popup, e_object_del);
 }
 
 static void
@@ -457,13 +444,8 @@ _places_popup_del_cb(Evas_Object *obj)
    inst = e_object_data_get(E_OBJECT(obj));
    if (!inst) return;
 
-   if (inst->o_main)
-   {
-      places_empty_box(inst->o_main);
-      evas_object_del(inst->o_main);
-      inst->o_main = NULL;
-   }
-   
+   places_empty_box(inst->o_main);
+   inst->o_main = NULL;
    inst->popup = NULL;
 }
 
@@ -479,7 +461,7 @@ _places_popup_new(Instance *inst)
    // create the popup
    popup = e_gadcon_popup_new(inst->gcc, EINA_FALSE);
    if (places_conf->autoclose_popup)
-     e_comp_object_util_autoclose(popup->comp_object, NULL, NULL, NULL);
+     e_comp_object_util_autoclose(popup->comp_object, _places_popup_del, NULL, inst);
    e_object_data_set(E_OBJECT(popup), inst);
    E_OBJECT_DEL_SET(popup, _places_popup_del_cb);
    inst->popup = popup;
@@ -495,6 +477,16 @@ _places_popup_new(Instance *inst)
    e_gadcon_popup_show(popup);
 }
 
+void
+places_popups_close(void)
+{
+   Eina_List *l;
+   Instance *inst;
+
+   EINA_LIST_FOREACH(instances, l, inst)
+     E_FREE_FUNC(inst->popup, e_object_del);
+}
+
 static void // mouse down on the icon (for shelf and toolbars)
 _places_icon_cb_mouse_down(void *data, Evas *evas, Evas_Object *obj, void *event)
 {
@@ -506,10 +498,10 @@ _places_icon_cb_mouse_down(void *data, Evas *evas, Evas_Object *obj, void *event
 
    if (ev->button == 1)
    {
-      if (!inst->o_main)
-         _places_popup_new(inst);
+      if (inst->popup)
+         _places_popup_del(inst, NULL);
       else
-         _places_popup_del(inst);
+         _places_popup_new(inst);
    }
    else if (ev->button == 2)
      places_run_fm(e_user_homedir_get());
