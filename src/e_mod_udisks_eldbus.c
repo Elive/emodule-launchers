@@ -327,13 +327,13 @@ static void
 _places_udisks_volume_task_cb(void *data, const Eldbus_Message *msg,
                               Eldbus_Pending *pending)
 {
-   // Volume *vol = data;
+   char *str;
 
-   // TODO alert if the operation has failed
-   // printf("sig: '%s'\n", eldbus_message_signature_get(msg));
-   // char *str;
-   // eldbus_message_arguments_get(msg,"s", &str);
-   // printf("%s\n", str);
+   if (eldbus_message_error_get(msg, NULL, NULL))
+   {
+      eldbus_message_arguments_get(msg,"s", &str);
+      e_util_dialog_internal("Operation failed", str);
+   }
 }
 
 static void
