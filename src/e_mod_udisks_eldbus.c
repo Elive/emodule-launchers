@@ -221,6 +221,12 @@ _places_udisks_vol_props_cb(void *data, const Eldbus_Message *msg, Eldbus_Pendin
          eldbus_message_iter_arguments_get(var, "b", &bool);
          if (bool) return;
       }
+      // skip volumes with presentation.hide set
+      if (!strcmp(key, "DevicePresentationHide"))
+      {
+         eldbus_message_iter_arguments_get(var, "b", &bool);
+         if (bool) return;
+      }
       else if (!strcmp(key, "IdUsage"))
          eldbus_message_iter_arguments_get(var, "s", &id_usage);
       else if (!strcmp(key, "DeviceFile"))
