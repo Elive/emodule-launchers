@@ -5,73 +5,79 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: places\n"
-"Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-04-14 18:28+0200\n"
-"PO-Revision-Date: 2012-09-17 12:30+0200\n"
-"Last-Translator: Aníbal Garrido <khany@member.trisquel.info>\n"
+"Report-Msgid-Bugs-To: $MSGID_BUGS_ADDRESS\n"
+"POT-Creation-Date: 2013-08-24 11:51+0200\n"
+"PO-Revision-Date: 2013-08-25 10:02+0000\n"
+"Last-Translator: Miguel Anxo Bouzada <mbouzada@gmail.com>\n"
 "Language-Team: http://trasno.net/ <proxecto@trasno.net>\n"
-"Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-08-26 04:51+0000\n"
+"X-Generator: Launchpad (build 16738)\n"
+"Language: gl\n"
 
-#: src/e_mod_config.c:54
+#: src/e_mod_config.c:55
 msgid "Places Settings"
-msgstr "Preferencias de Lugares"
+msgstr "Axustes de lugares"
 
-#: src/e_mod_config.c:136
+#: src/e_mod_config.c:138
 msgid "General"
 msgstr "Xeral"
 
-#: src/e_mod_config.c:139
+#: src/e_mod_config.c:141
 msgid "Show in main menu"
 msgstr "Amosar no menú principal"
 
-#: src/e_mod_config.c:143
+#: src/e_mod_config.c:145
 msgid "Hide the gadget header"
-msgstr "Agochar a cabeceira do módulo"
+msgstr "Agochar a cabeceira do trebello"
 
-#: src/e_mod_config.c:147
+#: src/e_mod_config.c:149
+msgid "Auto close the popup"
+msgstr "Pechar automáticamente as mensaxes emerxentes"
+
+#: src/e_mod_config.c:153
 msgid "Mount volumes at boot"
-msgstr "Montar volumes ó  iniciar"
+msgstr "Montar os volumes no arrinque"
 
-#: src/e_mod_config.c:151
+#: src/e_mod_config.c:157
 msgid "Mount volumes on insert"
-msgstr "Montar volumes ó inserir"
+msgstr "Montar os dispositivos ao inserilos"
 
-#: src/e_mod_config.c:155
+#: src/e_mod_config.c:161
 msgid "Open filemanager on insert"
-msgstr "Abre o xestor de ficheiros ó inserir"
+msgstr "Abrir o xestor de ficheiros ao inserir un dispositivo"
 
-#: src/e_mod_config.c:162
+#: src/e_mod_config.c:168
 msgid "Use a custom file manager"
-msgstr "Empregar un xestor de ficheiros personalizado"
+msgstr "Usar un xestor de ficheiros personalizado"
 
-#: src/e_mod_config.c:175
+#: src/e_mod_config.c:181
 msgid "Show in menu"
 msgstr "Amosar no menú"
 
-#: src/e_mod_config.c:178 src/e_mod_places.c:774
+#: src/e_mod_config.c:184 src/e_mod_places.c:803
 msgid "Home"
 msgstr "Cartafol persoal"
 
-#: src/e_mod_config.c:181 src/e_mod_places.c:783
+#: src/e_mod_config.c:187 src/e_mod_places.c:812
 msgid "Desktop"
 msgstr "Escritorio"
 
-#: src/e_mod_config.c:184 src/e_mod_places.c:793
+#: src/e_mod_config.c:190 src/e_mod_places.c:821
 msgid "Trash"
 msgstr "Lixo"
 
-#: src/e_mod_config.c:187 src/e_mod_places.c:618 src/e_mod_places.c:802
+#: src/e_mod_config.c:193 src/e_mod_places.c:652 src/e_mod_places.c:830
 msgid "Filesystem"
 msgstr "Sistema de ficheiros"
 
-#: src/e_mod_config.c:190 src/e_mod_places.c:811
+#: src/e_mod_config.c:196 src/e_mod_places.c:839
 msgid "Temp"
-msgstr "Temporal"
+msgstr "Temporais"
 
-#: src/e_mod_config.c:193
+#: src/e_mod_config.c:199
 msgid "Favorites"
 msgstr "Favoritos"
 
@@ -79,49 +85,49 @@ msgstr "Favoritos"
 msgid "Files"
 msgstr "Ficheiros"
 
-#: src/e_mod_main.c:61 src/e_mod_main.c:298 src/e_mod_places.c:236
-#: src/e_mod_places.c:868
+#: src/e_mod_main.c:61 src/e_mod_main.c:329 src/e_mod_places.c:274
+#: src/e_mod_places.c:896
 msgid "Places"
 msgstr "Lugares"
 
-#: src/e_mod_main.c:394
+#: src/e_mod_main.c:426
 msgid "Places Configuration Updated"
-msgstr "Configuración de Lugares actualizada"
+msgstr "A configuración de lugares foi actualizada"
 
-#: src/e_mod_main.c:434
+#: src/e_mod_main.c:542
 msgid "Settings"
-msgstr "Preferencias"
+msgstr "Axustes"
 
-#: src/e_mod_places.c:599
+#: src/e_mod_places.c:506
 msgid "Warning"
 msgstr "Aviso"
 
-#: src/e_mod_places.c:600
+#: src/e_mod_places.c:507
 msgid ""
 "<b>Cannot run the Enlightenment FileManager.</b><br>Please choose a custom "
 "file manager in<br>the gadget configuration."
 msgstr ""
-"<b>Non se pode executar o Xestor de Ficheiros de Enlightenment.</b><br>Por "
-"favor escolla un xestor de ficheiros personalizado na<br> configuración do "
-"módulo."
+"<b>Non é posíbel executar o xestor de ficheiros do "
+"Enlightenment.</b><br>Escolla un xestor de ficheiros personalizado "
+"no<br>trebello de configuración."
 
-#: src/e_mod_places.c:622
+#: src/e_mod_places.c:656
 msgid "No Name"
 msgstr "Sen nome"
 
-#: src/e_mod_places.c:629
+#: src/e_mod_places.c:663
 msgid "free of"
-msgstr "libre de"
+msgstr "sen"
 
-#: src/e_mod_places.c:635
+#: src/e_mod_places.c:669
 #, c-format
 msgid "%s Not Mounted"
 msgstr "%s non está montado"
 
-#: src/e_mod_places.c:662
+#: src/e_mod_places.c:696
 msgid "unmount"
-msgstr "Desmontar"
+msgstr "desmontar"
 
-#: src/e_mod_places.c:667
+#: src/e_mod_places.c:701
 msgid "eject"
 msgstr "expulsar"

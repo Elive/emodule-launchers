@@ -6,126 +6,128 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: enlightenment\n"
-"Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-04-14 18:28+0200\n"
-"PO-Revision-Date: 2009-11-15 09:10+0000\n"
-"Last-Translator: Mustafa Yılmaz <apshalasha@gmail.com>\n"
+"Report-Msgid-Bugs-To: $MSGID_BUGS_ADDRESS\n"
+"POT-Creation-Date: 2013-08-24 11:51+0200\n"
+"PO-Revision-Date: 2013-09-05 08:33+0000\n"
+"Last-Translator: Ali E.İMREK <alierkanimrek@gmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
-"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-16 04:46+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2013-09-06 05:28+0000\n"
+"X-Generator: Launchpad (build 16760)\n"
+"Language: tr\n"
 
-#: src/e_mod_config.c:54
+#: src/e_mod_config.c:55
 msgid "Places Settings"
-msgstr ""
+msgstr "Yerler Ayarları"
 
-#: src/e_mod_config.c:136
+#: src/e_mod_config.c:138
 msgid "General"
 msgstr "Genel"
 
-#: src/e_mod_config.c:139
+#: src/e_mod_config.c:141
 msgid "Show in main menu"
 msgstr "Ana menüde göster"
 
-#: src/e_mod_config.c:143
+#: src/e_mod_config.c:145
 msgid "Hide the gadget header"
-msgstr ""
+msgstr "Araç başlığını gizle"
 
-#: src/e_mod_config.c:147
+#: src/e_mod_config.c:149
+msgid "Auto close the popup"
+msgstr "Uyarıyı otomatik kapat"
+
+#: src/e_mod_config.c:153
 msgid "Mount volumes at boot"
-msgstr ""
+msgstr "Bölümleri açılışta bağla"
 
-#: src/e_mod_config.c:151
+#: src/e_mod_config.c:157
 msgid "Mount volumes on insert"
-msgstr ""
+msgstr "Bölümleri takıldığında bağla"
 
-#: src/e_mod_config.c:155
+#: src/e_mod_config.c:161
 msgid "Open filemanager on insert"
-msgstr ""
+msgstr "Takıldığında dosya yöneticisini aç"
 
-#: src/e_mod_config.c:162
+#: src/e_mod_config.c:168
 msgid "Use a custom file manager"
-msgstr "Özel bir dosya yöneticisi kullan"
+msgstr "Özel dosya yöneticisi kullan"
 
-#: src/e_mod_config.c:175
+#: src/e_mod_config.c:181
 msgid "Show in menu"
 msgstr "Menüde göster"
 
-#: src/e_mod_config.c:178 src/e_mod_places.c:774
+#: src/e_mod_config.c:184 src/e_mod_places.c:803
 msgid "Home"
-msgstr "Ev"
+msgstr "Ev Dizini"
 
-#: src/e_mod_config.c:181 src/e_mod_places.c:783
+#: src/e_mod_config.c:187 src/e_mod_places.c:812
 msgid "Desktop"
 msgstr "Masaüstü"
 
-#: src/e_mod_config.c:184 src/e_mod_places.c:793
+#: src/e_mod_config.c:190 src/e_mod_places.c:821
 msgid "Trash"
-msgstr "Çöp"
+msgstr "Çöp Kutusu"
 
-#: src/e_mod_config.c:187 src/e_mod_places.c:618 src/e_mod_places.c:802
+#: src/e_mod_config.c:193 src/e_mod_places.c:652 src/e_mod_places.c:830
 msgid "Filesystem"
-msgstr "Dosya sistemi"
+msgstr "Dosya Sistemi"
 
-#: src/e_mod_config.c:190 src/e_mod_places.c:811
+#: src/e_mod_config.c:196 src/e_mod_places.c:839
 msgid "Temp"
 msgstr "Geçici"
 
-#: src/e_mod_config.c:193
+#: src/e_mod_config.c:199
 msgid "Favorites"
-msgstr "Beğenilenler"
+msgstr "Yer İmleri"
 
 #: src/e_mod_main.c:59
 msgid "Files"
 msgstr "Dosyalar"
 
-#: src/e_mod_main.c:61 src/e_mod_main.c:298 src/e_mod_places.c:236
-#: src/e_mod_places.c:868
+#: src/e_mod_main.c:61 src/e_mod_main.c:329 src/e_mod_places.c:274
+#: src/e_mod_places.c:896
 msgid "Places"
 msgstr "Yerler"
 
-#: src/e_mod_main.c:394
-#, fuzzy
+#: src/e_mod_main.c:426
 msgid "Places Configuration Updated"
-msgstr "Yerler Yapılandırması"
+msgstr "Yerler Ayarları Güncellendi"
 
-#: src/e_mod_main.c:434
+#: src/e_mod_main.c:542
 msgid "Settings"
-msgstr ""
+msgstr "Ayarlar"
 
-#: src/e_mod_places.c:599
+#: src/e_mod_places.c:506
 msgid "Warning"
-msgstr ""
+msgstr "Dikkat"
 
-#: src/e_mod_places.c:600
+#: src/e_mod_places.c:507
 msgid ""
 "<b>Cannot run the Enlightenment FileManager.</b><br>Please choose a custom "
 "file manager in<br>the gadget configuration."
 msgstr ""
+"<b>Enlightenment Dosya Yöneticisi çalıştırılamadı.</b><br>Lütfen araç "
+"ayarlarından <br>özel bir dosya yöneticisi seçin"
 
-#: src/e_mod_places.c:622
+#: src/e_mod_places.c:656
 msgid "No Name"
-msgstr "İsimsiz"
+msgstr "İsim yok"
 
-#: src/e_mod_places.c:629
+#: src/e_mod_places.c:663
 msgid "free of"
-msgstr "boş"
+msgstr "Boş"
 
-#: src/e_mod_places.c:635
+#: src/e_mod_places.c:669
 #, c-format
 msgid "%s Not Mounted"
-msgstr "%s Bağlı Değil"
+msgstr "%s Bağlanamadı"
 
-#: src/e_mod_places.c:662
+#: src/e_mod_places.c:696
 msgid "unmount"
 msgstr "ayır"
 
-#: src/e_mod_places.c:667
+#: src/e_mod_places.c:701
 msgid "eject"
 msgstr "çıkart"
-
-#~ msgid "Configuration"
-#~ msgstr "Yapılandırma"
