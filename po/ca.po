@@ -1,30 +1,33 @@
+# Catalan translation for enlightenment
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the enlightenment package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Marc Furtià  i Puig\\\n"
-"Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-01-29 18:09+0100\n"
-"PO-Revision-Date: 2013-02-04 17:23+0100\n"
-"Last-Translator: Marc Furtià i Puig <marc.furtia@gmail.com>\n"
-"Language-Team: \n"
-"Language: ca\n"
+"Project-Id-Version: enlightenment\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2013-12-30 12:11+0100\n"
+"PO-Revision-Date: 2013-12-30 11:20+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Bookmarks: -1,-1,1139,-1,-1,-1,-1,-1,-1,-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Launchpad-Export-Date: 2014-01-11 06:35+0000\n"
+"X-Generator: Launchpad (build 16890)\n"
 
 #: src/e_mod_config.c:54
 msgid "Places Settings"
-msgstr "Preferències Llocs"
+msgstr ""
 
 #: src/e_mod_config.c:136
 msgid "General"
-msgstr "General"
+msgstr ""
 
 #: src/e_mod_config.c:139
 msgid "Show in main menu"
-msgstr "Mostra al Menú Principal"
+msgstr ""
 
 #: src/e_mod_config.c:143
 msgid "Hide the gadget header"
@@ -32,104 +35,92 @@ msgstr ""
 
 #: src/e_mod_config.c:147
 msgid "Mount volumes at boot"
-msgstr "Monto volums al arrancar"
+msgstr ""
 
 #: src/e_mod_config.c:151
 msgid "Mount volumes on insert"
-msgstr "Monta Unitats al insertar"
+msgstr ""
 
 #: src/e_mod_config.c:155
 msgid "Open filemanager on insert"
-msgstr "Obre Manegador de Fitxers al insertarDateimanager automatisch starten"
+msgstr ""
 
 #: src/e_mod_config.c:162
 msgid "Use a custom file manager"
-msgstr "Usa un gestor de fitxers personalitzat"
+msgstr ""
 
 #: src/e_mod_config.c:175
 msgid "Show in menu"
-msgstr "Mostra en el menú"
+msgstr ""
 
-#: src/e_mod_config.c:178
-#: src/e_mod_places.c:774
+#: src/e_mod_config.c:178 src/e_mod_places.c:807
 msgid "Home"
-msgstr "Directori Personal"
+msgstr ""
 
-#: src/e_mod_config.c:181
-#: src/e_mod_places.c:783
+#: src/e_mod_config.c:181 src/e_mod_places.c:816
 msgid "Desktop"
-msgstr "Escriptori"
+msgstr ""
 
-#: src/e_mod_config.c:184
-#: src/e_mod_places.c:793
+#: src/e_mod_config.c:184 src/e_mod_places.c:826
 msgid "Trash"
-msgstr "Deixalla"
+msgstr ""
 
-#: src/e_mod_config.c:187
-#: src/e_mod_places.c:618
-#: src/e_mod_places.c:802
+#: src/e_mod_config.c:187 src/e_mod_places.c:651 src/e_mod_places.c:835
 msgid "Filesystem"
-msgstr "Sistema de Fitxers"
+msgstr ""
 
-#: src/e_mod_config.c:190
-#: src/e_mod_places.c:811
+#: src/e_mod_config.c:190 src/e_mod_places.c:844
 msgid "Temp"
-msgstr "Temporal"
+msgstr ""
 
 #: src/e_mod_config.c:193
 msgid "Favorites"
-msgstr "Preferits"
+msgstr ""
 
 #: src/e_mod_main.c:59
 msgid "Files"
-msgstr "Fitxers"
+msgstr ""
 
-#: src/e_mod_main.c:61
-#: src/e_mod_main.c:298
-#: src/e_mod_places.c:236
-#: src/e_mod_places.c:868
+#: src/e_mod_main.c:61 src/e_mod_main.c:301 src/e_mod_places.c:273
+#: src/e_mod_places.c:901
 msgid "Places"
-msgstr "LLocs"
+msgstr ""
 
-#: src/e_mod_main.c:394
+#: src/e_mod_main.c:397
 msgid "Places Configuration Updated"
-msgstr "Configuració Llocs Actualitzada "
+msgstr ""
 
-#: src/e_mod_main.c:434
+#: src/e_mod_main.c:507
 msgid "Settings"
 msgstr "Preferències"
 
-#: src/e_mod_places.c:599
+#: src/e_mod_places.c:632
 msgid "Warning"
 msgstr ""
 
-#: src/e_mod_places.c:600
-msgid "<b>Cannot run the Enlightenment FileManager.</b><br>Please choose a custom file manager in<br>the gadget configuration."
+#: src/e_mod_places.c:633
+msgid ""
+"<b>Cannot run the Enlightenment FileManager.</b><br>Please choose a custom "
+"file manager in<br>the gadget configuration."
 msgstr ""
 
-#: src/e_mod_places.c:622
+#: src/e_mod_places.c:655
 msgid "No Name"
-msgstr "Sense Nom"
-
-#: src/e_mod_places.c:629
-msgid "free of"
-msgstr "Lliure de"
-
-#: src/e_mod_places.c:635
-#, c-format
-msgid "%s Not Mounted"
-msgstr "%s No Montat"
+msgstr ""
 
 #: src/e_mod_places.c:662
+msgid "free of"
+msgstr ""
+
+#: src/e_mod_places.c:668
+#, c-format
+msgid "%s Not Mounted"
+msgstr ""
+
+#: src/e_mod_places.c:695
 msgid "unmount"
-msgstr "Desmonta"
+msgstr ""
 
-#: src/e_mod_places.c:667
+#: src/e_mod_places.c:700
 msgid "eject"
-msgstr "Expulsa"
-
-#~ msgid "Configuration"
-#~ msgstr "Konfiguration"
-
-#~ msgid "File manager (if blank uses Enlightenment)"
-#~ msgstr "Dateimanager (Leeres Feld nutzt internen)"
+msgstr ""
