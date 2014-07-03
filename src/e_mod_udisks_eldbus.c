@@ -7,6 +7,7 @@
 
 #include <Eldbus.h>
 #include <e.h>
+#include "e_mod_main.h"
 #include "e_mod_places.h"
 
 
@@ -338,7 +339,7 @@ _places_udisks_volume_task_cb(void *data, const Eldbus_Message *msg,
    if (eldbus_message_error_get(msg, NULL, NULL))
    {
       eldbus_message_arguments_get(msg,"s", &str);
-      e_util_dialog_internal("Operation failed", str);
+      e_util_dialog_internal(D_("Operation failed"), str);
    }
 }
 
