@@ -610,7 +610,13 @@ _places_human_size_get(unsigned long long size)
              else
                {
                   dsize /= 1024.0;
-                  suffix = "GB";
+                  if(dsize < 1024)
+                    suffix = "GB";
+                  else
+                    {
+                       dsize /= 1024.0;
+                       suffix = "TB";
+                    }
                }
           }
         snprintf(hum, sizeof(hum), "%.1f%s", dsize, suffix);
