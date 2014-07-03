@@ -596,30 +596,30 @@ _places_human_size_get(unsigned long long size)
 
    dsize = (double)size;
    if (dsize < 1024)
-     snprintf(hum, sizeof(hum), "%.0fb", dsize);
+     snprintf(hum, sizeof(hum), "%.0f%s", dsize, D_("b"));
    else
      {
         dsize /= 1024.0;
         if (dsize < 1024)
-          suffix = "KB";
+          suffix = N_("KB");
         else
           {
              dsize /= 1024.0;
              if (dsize < 1024)
-               suffix = "MB";
+               suffix = N_("MB");
              else
                {
                   dsize /= 1024.0;
                   if(dsize < 1024)
-                    suffix = "GB";
+                    suffix = N_("GB");
                   else
                     {
                        dsize /= 1024.0;
-                       suffix = "TB";
+                       suffix = N_("TB");
                     }
                }
           }
-        snprintf(hum, sizeof(hum), "%.1f%s", dsize, suffix);
+        snprintf(hum, sizeof(hum), "%.1f%s", dsize, D_(suffix));
      }
 
    return eina_stringshare_add(hum);

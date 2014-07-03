@@ -9,6 +9,7 @@
 # define bind_textdomain_codeset(domain,codeset)
 # define D_(string) (string)
 #endif
+#define N_(string) (string)
 
 /* Macros used for config file versioning */
 #define MOD_CONFIG_FILE_EPOCH 0x0001
