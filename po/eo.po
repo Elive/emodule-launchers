@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: places 0.1.0\n"
 "Report-Msgid-Bugs-To: $MSGID_BUGS_ADDRESS\n"
-"POT-Creation-Date: 2013-06-21 01:05+0200\n"
-"PO-Revision-Date: 2013-06-29 09:29+0000\n"
+"POT-Creation-Date: 2014-07-05 11:31+0200\n"
+"PO-Revision-Date: 2014-08-22 16:50+0000\n"
 "Last-Translator: Eliovir <Unknown>\n"
 "Language-Team: Esperanto <translation-team-eo@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-30 05:56+0000\n"
-"X-Generator: Launchpad (build 16692)\n"
+"X-Launchpad-Export-Date: 2014-08-23 06:43+0000\n"
+"X-Generator: Launchpad (build 17163)\n"
 "Language: eo\n"
 
 #: src/e_mod_config.c:55
@@ -58,23 +58,23 @@ msgstr "Uzi propran dosieradministrilon"
 msgid "Show in menu"
 msgstr "Montri en menuo"
 
-#: src/e_mod_config.c:184 src/e_mod_places.c:803
+#: src/e_mod_config.c:184 src/e_mod_places.c:800
 msgid "Home"
 msgstr "Hejmo"
 
-#: src/e_mod_config.c:187 src/e_mod_places.c:812
+#: src/e_mod_config.c:187 src/e_mod_places.c:809
 msgid "Desktop"
 msgstr "Labortablo"
 
-#: src/e_mod_config.c:190 src/e_mod_places.c:821
+#: src/e_mod_config.c:190 src/e_mod_places.c:818
 msgid "Trash"
 msgstr "Rubujo"
 
-#: src/e_mod_config.c:193 src/e_mod_places.c:652 src/e_mod_places.c:830
+#: src/e_mod_config.c:193 src/e_mod_places.c:649 src/e_mod_places.c:827
 msgid "Filesystem"
 msgstr "Dosiersistemo"
 
-#: src/e_mod_config.c:196 src/e_mod_places.c:839
+#: src/e_mod_config.c:196 src/e_mod_places.c:836
 msgid "Temp"
 msgstr "Dumtempaj"
 
@@ -86,24 +86,24 @@ msgstr "Preferitaj"
 msgid "Files"
 msgstr "Dosieroj"
 
-#: src/e_mod_main.c:61 src/e_mod_main.c:329 src/e_mod_places.c:274
-#: src/e_mod_places.c:896
+#: src/e_mod_main.c:61 src/e_mod_main.c:315 src/e_mod_places.c:265
+#: src/e_mod_places.c:893
 msgid "Places"
 msgstr "Ejoj"
 
-#: src/e_mod_main.c:426
+#: src/e_mod_main.c:412
 msgid "Places Configuration Updated"
 msgstr "Ĝisdatigitaj agordoj de Ejoj"
 
-#: src/e_mod_main.c:542
+#: src/e_mod_main.c:534
 msgid "Settings"
 msgstr "Agordoj"
 
-#: src/e_mod_places.c:506
+#: src/e_mod_places.c:497
 msgid "Warning"
 msgstr "Averto"
 
-#: src/e_mod_places.c:507
+#: src/e_mod_places.c:498
 msgid ""
 "<b>Cannot run the Enlightenment FileManager.</b><br>Please choose a custom "
 "file manager in<br>the gadget configuration."
@@ -111,23 +111,47 @@ msgstr ""
 "<b>Enlightenment dosieradministrilon ne lanĉeblas.</b><br>Bonvole elekti "
 "propran dosieradministrilon<br> en la agordoj de akcesoraĵo."
 
-#: src/e_mod_places.c:656
+#: src/e_mod_places.c:599
+msgid "b"
+msgstr "b"
+
+#: src/e_mod_places.c:604
+msgid "KB"
+msgstr "KB"
+
+#: src/e_mod_places.c:609
+msgid "MB"
+msgstr "MB"
+
+#: src/e_mod_places.c:614
+msgid "GB"
+msgstr "GB"
+
+#: src/e_mod_places.c:618
+msgid "TB"
+msgstr "TB"
+
+#: src/e_mod_places.c:653
 msgid "No Name"
 msgstr "Neniu nomo"
 
-#: src/e_mod_places.c:663
+#: src/e_mod_places.c:660
 msgid "free of"
 msgstr "libera de"
 
-#: src/e_mod_places.c:669
+#: src/e_mod_places.c:666
 #, c-format
 msgid "%s Not Mounted"
 msgstr "%s ne surmuntita"
 
-#: src/e_mod_places.c:696
+#: src/e_mod_places.c:693
 msgid "unmount"
 msgstr "demeti"
 
-#: src/e_mod_places.c:701
+#: src/e_mod_places.c:698
 msgid "eject"
 msgstr "elĵeti"
+
+#: src/e_mod_udisks_eldbus.c:342
+msgid "Operation failed"
+msgstr "Ago fiaskis"

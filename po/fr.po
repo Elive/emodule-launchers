@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Places module\n"
 "Report-Msgid-Bugs-To: $MSGID_BUGS_ADDRESS\n"
-"POT-Creation-Date: 2013-05-22 20:28+0200\n"
-"PO-Revision-Date: 2012-12-21 19:41+0000\n"
-"Last-Translator: batden <dazibao@sfr.fr>\n"
+"POT-Creation-Date: 2014-07-05 11:31+0200\n"
+"PO-Revision-Date: 2014-07-05 10:26+0000\n"
+"Last-Translator: Eliovir <Unknown>\n"
 "Language-Team: Enlightenment French Team <sansgourou@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-05-23 05:28+0000\n"
-"X-Generator: Launchpad (build 16640)\n"
+"X-Launchpad-Export-Date: 2014-07-06 05:37+0000\n"
+"X-Generator: Launchpad (build 17086)\n"
 "X-Poedit-Country: FRANCE\n"
 "Language: \n"
 "X-Poedit-Language: French\n"
@@ -23,7 +23,7 @@ msgstr ""
 
 #: src/e_mod_config.c:55
 msgid "Places Settings"
-msgstr "Paramétrage de Raccourcis"
+msgstr "Paramètres de Emplacements"
 
 #: src/e_mod_config.c:138
 msgid "General"
@@ -35,51 +35,51 @@ msgstr "Afficher dans le menu principal"
 
 #: src/e_mod_config.c:145
 msgid "Hide the gadget header"
-msgstr "Masquer l'en-tête du gadget"
+msgstr "Cacher l'entête du gadget"
 
 #: src/e_mod_config.c:149
 msgid "Auto close the popup"
-msgstr ""
+msgstr "Fermer automatiquement les fenêtres surgissantes"
 
 #: src/e_mod_config.c:153
 msgid "Mount volumes at boot"
-msgstr ""
+msgstr "Monter les volumes au démarrage"
 
 #: src/e_mod_config.c:157
 msgid "Mount volumes on insert"
-msgstr "Montage des volumes à l'insertion"
+msgstr "Monter les volumes à l'insertion"
 
 #: src/e_mod_config.c:161
 msgid "Open filemanager on insert"
-msgstr "Ouvrir le gestionnaire de fichiers à l'insertion"
+msgstr "Ouvrir un gestionnaire de fichiers à l'insertion"
 
 #: src/e_mod_config.c:168
 msgid "Use a custom file manager"
-msgstr "Utiliser un gestionnaire de fichiers personnalisé"
+msgstr "Utiliser un gestionnaire de fichiers défini"
 
 #: src/e_mod_config.c:181
 msgid "Show in menu"
 msgstr "Afficher dans le menu"
 
-#: src/e_mod_config.c:184 src/e_mod_places.c:803
+#: src/e_mod_config.c:184 src/e_mod_places.c:800
 msgid "Home"
 msgstr "Dossier personnel"
 
-#: src/e_mod_config.c:187 src/e_mod_places.c:812
+#: src/e_mod_config.c:187 src/e_mod_places.c:809
 msgid "Desktop"
 msgstr "Bureau"
 
-#: src/e_mod_config.c:190 src/e_mod_places.c:821
+#: src/e_mod_config.c:190 src/e_mod_places.c:818
 msgid "Trash"
 msgstr "Corbeille"
 
-#: src/e_mod_config.c:193 src/e_mod_places.c:652 src/e_mod_places.c:830
+#: src/e_mod_config.c:193 src/e_mod_places.c:649 src/e_mod_places.c:827
 msgid "Filesystem"
-msgstr "Racine"
+msgstr "Système de fichiers"
 
-#: src/e_mod_config.c:196 src/e_mod_places.c:839
+#: src/e_mod_config.c:196 src/e_mod_places.c:836
 msgid "Temp"
-msgstr "/tmp"
+msgstr "Temporaires"
 
 #: src/e_mod_config.c:199
 msgid "Favorites"
@@ -89,48 +89,73 @@ msgstr "Favoris"
 msgid "Files"
 msgstr "Fichiers"
 
-#: src/e_mod_main.c:61 src/e_mod_main.c:329 src/e_mod_places.c:274
-#: src/e_mod_places.c:896
+#: src/e_mod_main.c:61 src/e_mod_main.c:315 src/e_mod_places.c:265
+#: src/e_mod_places.c:893
 msgid "Places"
-msgstr "Raccourcis"
+msgstr "Emplacements"
 
-#: src/e_mod_main.c:426
+#: src/e_mod_main.c:412
 msgid "Places Configuration Updated"
-msgstr "Configuration de Raccourcis actualisée"
+msgstr "Configuration de Emplacements mise à jour"
 
-#: src/e_mod_main.c:542
+#: src/e_mod_main.c:534
 msgid "Settings"
 msgstr "Configuration"
 
-#: src/e_mod_places.c:506
+#: src/e_mod_places.c:497
 msgid "Warning"
-msgstr "Avertissement"
+msgstr "Attention"
 
-#: src/e_mod_places.c:507
+#: src/e_mod_places.c:498
 msgid ""
 "<b>Cannot run the Enlightenment FileManager.</b><br>Please choose a custom "
 "file manager in<br>the gadget configuration."
 msgstr ""
-"<b>Impossible d'exécuter EFM.</b><br>Veuillez choisir un gestionnaire de "
-"fichiers<br>personnalisé dans la configuration du gadget."
+"<b>Le gestionnaire de fichiers d'Enlightenment ne peut être "
+"lancé.</b><br>Veuillez définir un autre gestionnaire dans<br>la "
+"configuration du gadget."
 
-#: src/e_mod_places.c:656
+#: src/e_mod_places.c:599
+msgid "b"
+msgstr ""
+
+#: src/e_mod_places.c:604
+msgid "KB"
+msgstr ""
+
+#: src/e_mod_places.c:609
+msgid "MB"
+msgstr ""
+
+#: src/e_mod_places.c:614
+msgid "GB"
+msgstr ""
+
+#: src/e_mod_places.c:618
+msgid "TB"
+msgstr ""
+
+#: src/e_mod_places.c:653
 msgid "No Name"
 msgstr "Sans nom"
 
-#: src/e_mod_places.c:663
+#: src/e_mod_places.c:660
 msgid "free of"
-msgstr "de libre sur"
+msgstr "libre de"
 
-#: src/e_mod_places.c:669
+#: src/e_mod_places.c:666
 #, c-format
 msgid "%s Not Mounted"
-msgstr "%s Pas Monté"
+msgstr "%s pas monté"
 
-#: src/e_mod_places.c:696
+#: src/e_mod_places.c:693
 msgid "unmount"
 msgstr "démonter"
 
-#: src/e_mod_places.c:701
+#: src/e_mod_places.c:698
 msgid "eject"
 msgstr "éjecter"
+
+#: src/e_mod_udisks_eldbus.c:342
+msgid "Operation failed"
+msgstr ""
