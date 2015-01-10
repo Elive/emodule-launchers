@@ -332,6 +332,12 @@ places_fill_box(Evas_Object *main, Eina_Bool horiz)
           {
              f1 = "drive"; f2 = "removable-media"; f3 = "usb";
           }
+        /* network filesystem */
+        else if (!strcmp(vol->fstype, "nfs") ||
+                 !strcmp(vol->fstype, "cifs"))
+          {
+             f1 = "folder"; f2 = "remote";
+          }
 
         // search the icon, following freedesktop fallback system
         found = 0;
@@ -358,15 +364,22 @@ places_fill_box(Evas_Object *main, Eina_Bool horiz)
         else evas_object_del(icon);
 
         //set partition type tag
-        if (!strcmp(vol->fstype, "ext2") || !strcmp(vol->fstype, "ext3") ||
-            !strcmp(vol->fstype, "ext4") || !strcmp(vol->fstype, "reiserfs"))
+        if (!strcmp(vol->fstype, "ext2") ||
+            !strcmp(vol->fstype, "ext3") ||
+            !strcmp(vol->fstype, "ext4") ||
+            !strcmp(vol->fstype, "reiserfs") ||
+            !strcmp(vol->fstype, "nfs"))
           edje_object_signal_emit(o, "icon,tag,ext3", "places");
-        else if (!strcmp(vol->fstype, "ufs") || !strcmp(vol->fstype, "zfs"))
+        else if (!strcmp(vol->fstype, "ufs") ||
+                 !strcmp(vol->fstype, "zfs"))
           edje_object_signal_emit(o, "icon,tag,ufs", "places");
-        else if (!strcmp(vol->fstype, "vfat") || !strcmp(vol->fstype, "ntfs") ||
-                 !strcmp(vol->fstype, "ntfs-3g"))
+        else if (!strcmp(vol->fstype, "vfat") ||
+                 !strcmp(vol->fstype, "ntfs") ||
+                 !strcmp(vol->fstype, "ntfs-3g") ||
+                 !strcmp(vol->fstype, "cifs"))
           edje_object_signal_emit(o, "icon,tag,fat", "places");
-        else if (!strcmp(vol->fstype, "hfs") || !strcmp(vol->fstype, "hfsplus"))
+        else if (!strcmp(vol->fstype, "hfs") ||
+                 !strcmp(vol->fstype, "hfsplus"))
           edje_object_signal_emit(o, "icon,tag,hfs", "places");
         else if (!strcmp(vol->fstype, "udf"))
           edje_object_signal_emit(o, "icon,tag,dvd", "places");
