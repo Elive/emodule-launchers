@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: places VERSION\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-04-14 18:28+0200\n"
+"POT-Creation-Date: 2014-10-13 21:18+0200\n"
 "PO-Revision-Date: 2012-12-22 06:15+0800\n"
 "Last-Translator: Aron Xu <happyaron.xu@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -19,63 +19,67 @@ msgstr ""
 "X-Launchpad-Export-Date: 2010-02-11 05:02+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/e_mod_config.c:54
+#: src/e_mod_config.c:55
 msgid "Places Settings"
 msgstr "Places 设置"
 
-#: src/e_mod_config.c:136
+#: src/e_mod_config.c:138
 msgid "General"
 msgstr "常规"
 
-#: src/e_mod_config.c:139
+#: src/e_mod_config.c:141
 msgid "Show in main menu"
 msgstr "在主菜单中显示"
 
-#: src/e_mod_config.c:143
+#: src/e_mod_config.c:145
 msgid "Hide the gadget header"
 msgstr "隐藏组件头"
 
-#: src/e_mod_config.c:147
+#: src/e_mod_config.c:149
+msgid "Auto close the popup"
+msgstr ""
+
+#: src/e_mod_config.c:153
 msgid "Mount volumes at boot"
 msgstr "启动时挂载卷"
 
-#: src/e_mod_config.c:151
+#: src/e_mod_config.c:157
 msgid "Mount volumes on insert"
 msgstr "插入后立刻挂载"
 
-#: src/e_mod_config.c:155
+#: src/e_mod_config.c:161
 msgid "Open filemanager on insert"
 msgstr "插入后启动文件管理器"
 
-#: src/e_mod_config.c:162
+#: src/e_mod_config.c:168
 msgid "Use a custom file manager"
 msgstr "使用常规文件管理器"
 
-#: src/e_mod_config.c:175
+#: src/e_mod_config.c:181
 msgid "Show in menu"
 msgstr "在菜单中显示"
 
-#: src/e_mod_config.c:178 src/e_mod_places.c:774
+#: src/e_mod_config.c:184 src/e_mod_places.c:800
 msgid "Home"
 msgstr "主目录"
 
-#: src/e_mod_config.c:181 src/e_mod_places.c:783
+#: src/e_mod_config.c:187 src/e_mod_places.c:809
 msgid "Desktop"
 msgstr "桌面"
 
-#: src/e_mod_config.c:184 src/e_mod_places.c:793
+#: src/e_mod_config.c:190 src/e_mod_places.c:818
 msgid "Trash"
 msgstr "回收站"
 
-#: src/e_mod_config.c:187 src/e_mod_places.c:618 src/e_mod_places.c:802
+#: src/e_mod_config.c:193 src/e_mod_places.c:649 src/e_mod_places.c:827
 msgid "Filesystem"
 msgstr "文件系统"
 
-#: src/e_mod_config.c:190 src/e_mod_places.c:811
+#: src/e_mod_config.c:196 src/e_mod_places.c:836
 msgid "Temp"
 msgstr "临时文件"
 
-#: src/e_mod_config.c:193
+#: src/e_mod_config.c:199
 msgid "Favorites"
 msgstr "收藏夹"
 
@@ -83,24 +87,24 @@ msgstr "收藏夹"
 msgid "Files"
 msgstr "文件"
 
-#: src/e_mod_main.c:61 src/e_mod_main.c:298 src/e_mod_places.c:236
-#: src/e_mod_places.c:868
+#: src/e_mod_main.c:61 src/e_mod_main.c:315 src/e_mod_places.c:265
+#: src/e_mod_places.c:893
 msgid "Places"
 msgstr "位置"
 
-#: src/e_mod_main.c:394
+#: src/e_mod_main.c:412
 msgid "Places Configuration Updated"
 msgstr "已更新 Places 配置"
 
-#: src/e_mod_main.c:434
+#: src/e_mod_main.c:534
 msgid "Settings"
 msgstr "设置"
 
-#: src/e_mod_places.c:599
+#: src/e_mod_places.c:497
 msgid "Warning"
 msgstr "警告"
 
-#: src/e_mod_places.c:600
+#: src/e_mod_places.c:498
 msgid ""
 "<b>Cannot run the Enlightenment FileManager.</b><br>Please choose a custom "
 "file manager in<br>the gadget configuration."
@@ -108,26 +112,50 @@ msgstr ""
 "<b>无法运行 Enlightenment 文件管理器。</b><b>请在配置中选择一个自定义的文件管"
 "理器。"
 
-#: src/e_mod_places.c:622
+#: src/e_mod_places.c:599
+msgid "b"
+msgstr ""
+
+#: src/e_mod_places.c:604
+msgid "KB"
+msgstr ""
+
+#: src/e_mod_places.c:609
+msgid "MB"
+msgstr ""
+
+#: src/e_mod_places.c:614
+msgid "GB"
+msgstr ""
+
+#: src/e_mod_places.c:618
+msgid "TB"
+msgstr ""
+
+#: src/e_mod_places.c:653
 msgid "No Name"
 msgstr "无名称"
 
-#: src/e_mod_places.c:629
+#: src/e_mod_places.c:660
 msgid "free of"
 msgstr "空闲，总计"
 
-#: src/e_mod_places.c:635
+#: src/e_mod_places.c:666
 #, c-format
 msgid "%s Not Mounted"
 msgstr "%s 未挂载"
 
-#: src/e_mod_places.c:662
+#: src/e_mod_places.c:693
 msgid "unmount"
 msgstr "卸载"
 
-#: src/e_mod_places.c:667
+#: src/e_mod_places.c:698
 msgid "eject"
 msgstr "弹出"
+
+#: src/e_mod_udisks_eldbus.c:342
+msgid "Operation failed"
+msgstr ""
 
 #~ msgid "Configuration"
 #~ msgstr "配置"

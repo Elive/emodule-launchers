@@ -6,17 +6,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: enlightenment\n"
-"Report-Msgid-Bugs-To: $MSGID_BUGS_ADDRESS\n"
-"POT-Creation-Date: 2013-08-24 11:51+0200\n"
+"Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
+"POT-Creation-Date: 2014-10-13 21:18+0200\n"
 "PO-Revision-Date: 2013-06-24 09:31+0000\n"
 "Last-Translator: Саша Петровић <salepetronije@gmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
+"Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2013-08-25 05:04+0000\n"
 "X-Generator: Launchpad (build 16738)\n"
-"Language: sr\n"
 
 #: src/e_mod_config.c:55
 msgid "Places Settings"
@@ -58,23 +58,23 @@ msgstr "Користи прилагођеног управника датоте�
 msgid "Show in menu"
 msgstr "Прикажи у изборнику"
 
-#: src/e_mod_config.c:184 src/e_mod_places.c:803
+#: src/e_mod_config.c:184 src/e_mod_places.c:800
 msgid "Home"
 msgstr "Почетна"
 
-#: src/e_mod_config.c:187 src/e_mod_places.c:812
+#: src/e_mod_config.c:187 src/e_mod_places.c:809
 msgid "Desktop"
 msgstr "Радна површ"
 
-#: src/e_mod_config.c:190 src/e_mod_places.c:821
+#: src/e_mod_config.c:190 src/e_mod_places.c:818
 msgid "Trash"
 msgstr "Смеће"
 
-#: src/e_mod_config.c:193 src/e_mod_places.c:652 src/e_mod_places.c:830
+#: src/e_mod_config.c:193 src/e_mod_places.c:649 src/e_mod_places.c:827
 msgid "Filesystem"
 msgstr "Систем датотека"
 
-#: src/e_mod_config.c:196 src/e_mod_places.c:839
+#: src/e_mod_config.c:196 src/e_mod_places.c:836
 msgid "Temp"
 msgstr "Привремена"
 
@@ -86,24 +86,24 @@ msgstr "Омиљено"
 msgid "Files"
 msgstr "Датотеке"
 
-#: src/e_mod_main.c:61 src/e_mod_main.c:329 src/e_mod_places.c:274
-#: src/e_mod_places.c:896
+#: src/e_mod_main.c:61 src/e_mod_main.c:315 src/e_mod_places.c:265
+#: src/e_mod_places.c:893
 msgid "Places"
 msgstr "Места"
 
-#: src/e_mod_main.c:426
+#: src/e_mod_main.c:412
 msgid "Places Configuration Updated"
 msgstr "Поставке места су освежене"
 
-#: src/e_mod_main.c:542
+#: src/e_mod_main.c:534
 msgid "Settings"
 msgstr "Поставке"
 
-#: src/e_mod_places.c:506
+#: src/e_mod_places.c:497
 msgid "Warning"
 msgstr "Упозорење"
 
-#: src/e_mod_places.c:507
+#: src/e_mod_places.c:498
 msgid ""
 "<b>Cannot run the Enlightenment FileManager.</b><br>Please choose a custom "
 "file manager in<br>the gadget configuration."
@@ -111,23 +111,47 @@ msgstr ""
 "<b>Нисам успео да покренем управника датотека Просвећења.</b><br>Изаберите "
 "прилагођеног управника датотека у<br>поставкама справице."
 
-#: src/e_mod_places.c:656
+#: src/e_mod_places.c:599
+msgid "b"
+msgstr ""
+
+#: src/e_mod_places.c:604
+msgid "KB"
+msgstr ""
+
+#: src/e_mod_places.c:609
+msgid "MB"
+msgstr ""
+
+#: src/e_mod_places.c:614
+msgid "GB"
+msgstr ""
+
+#: src/e_mod_places.c:618
+msgid "TB"
+msgstr ""
+
+#: src/e_mod_places.c:653
 msgid "No Name"
 msgstr "Без имена"
 
-#: src/e_mod_places.c:663
+#: src/e_mod_places.c:660
 msgid "free of"
 msgstr ""
 
-#: src/e_mod_places.c:669
+#: src/e_mod_places.c:666
 #, c-format
 msgid "%s Not Mounted"
 msgstr "%s није прикачен"
 
-#: src/e_mod_places.c:696
+#: src/e_mod_places.c:693
 msgid "unmount"
 msgstr "откачи"
 
-#: src/e_mod_places.c:701
+#: src/e_mod_places.c:698
 msgid "eject"
 msgstr "избаци"
+
+#: src/e_mod_udisks_eldbus.c:342
+msgid "Operation failed"
+msgstr ""

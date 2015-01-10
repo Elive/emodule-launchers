@@ -80,4 +80,5 @@ src/*.o
 src/*.lo
 src/*.la
 stamp-h1
+compile
 

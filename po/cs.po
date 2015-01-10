@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Places\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-04-14 18:28+0200\n"
+"POT-Creation-Date: 2014-10-13 21:18+0200\n"
 "PO-Revision-Date: 2011-10-15 12:46+0200\n"
 "Last-Translator: Vít Pelčák <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -17,64 +17,68 @@ msgstr ""
 "X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: src/e_mod_config.c:54
+#: src/e_mod_config.c:55
 msgid "Places Settings"
 msgstr "Nastavení modulu Místa"
 
-#: src/e_mod_config.c:136
+#: src/e_mod_config.c:138
 msgid "General"
 msgstr "Obecné"
 
-#: src/e_mod_config.c:139
+#: src/e_mod_config.c:141
 msgid "Show in main menu"
 msgstr "Zobrazit v hlavním menu"
 
-#: src/e_mod_config.c:143
+#: src/e_mod_config.c:145
 msgid "Hide the gadget header"
 msgstr ""
 
-#: src/e_mod_config.c:147
+#: src/e_mod_config.c:149
+msgid "Auto close the popup"
+msgstr ""
+
+#: src/e_mod_config.c:153
 #, fuzzy
 msgid "Mount volumes at boot"
 msgstr "Připojit zařízení při vložení"
 
-#: src/e_mod_config.c:151
+#: src/e_mod_config.c:157
 msgid "Mount volumes on insert"
 msgstr "Připojit zařízení při vložení"
 
-#: src/e_mod_config.c:155
+#: src/e_mod_config.c:161
 msgid "Open filemanager on insert"
 msgstr "Otevřít správce souborů při vložení"
 
-#: src/e_mod_config.c:162
+#: src/e_mod_config.c:168
 msgid "Use a custom file manager"
 msgstr "Použít vlastní správce souborů"
 
-#: src/e_mod_config.c:175
+#: src/e_mod_config.c:181
 msgid "Show in menu"
 msgstr "Zobrazit v nabídce"
 
-#: src/e_mod_config.c:178 src/e_mod_places.c:774
+#: src/e_mod_config.c:184 src/e_mod_places.c:800
 msgid "Home"
 msgstr "Domovská složka"
 
-#: src/e_mod_config.c:181 src/e_mod_places.c:783
+#: src/e_mod_config.c:187 src/e_mod_places.c:809
 msgid "Desktop"
 msgstr "Plocha"
 
-#: src/e_mod_config.c:184 src/e_mod_places.c:793
+#: src/e_mod_config.c:190 src/e_mod_places.c:818
 msgid "Trash"
 msgstr "Koš"
 
-#: src/e_mod_config.c:187 src/e_mod_places.c:618 src/e_mod_places.c:802
+#: src/e_mod_config.c:193 src/e_mod_places.c:649 src/e_mod_places.c:827
 msgid "Filesystem"
 msgstr "Systém souborů"
 
-#: src/e_mod_config.c:190 src/e_mod_places.c:811
+#: src/e_mod_config.c:196 src/e_mod_places.c:836
 msgid "Temp"
 msgstr "Dočasné"
 
-#: src/e_mod_config.c:193
+#: src/e_mod_config.c:199
 msgid "Favorites"
 msgstr "Oblíbené"
 
@@ -82,50 +86,74 @@ msgstr "Oblíbené"
 msgid "Files"
 msgstr "Soubory"
 
-#: src/e_mod_main.c:61 src/e_mod_main.c:298 src/e_mod_places.c:236
-#: src/e_mod_places.c:868
+#: src/e_mod_main.c:61 src/e_mod_main.c:315 src/e_mod_places.c:265
+#: src/e_mod_places.c:893
 msgid "Places"
 msgstr "Místa"
 
-#: src/e_mod_main.c:394
+#: src/e_mod_main.c:412
 #, fuzzy
 msgid "Places Configuration Updated"
 msgstr "Nastavení modulu Místa"
 
-#: src/e_mod_main.c:434
+#: src/e_mod_main.c:534
 msgid "Settings"
 msgstr "Nastavení"
 
-#: src/e_mod_places.c:599
+#: src/e_mod_places.c:497
 msgid "Warning"
 msgstr ""
 
-#: src/e_mod_places.c:600
+#: src/e_mod_places.c:498
 msgid ""
 "<b>Cannot run the Enlightenment FileManager.</b><br>Please choose a custom "
 "file manager in<br>the gadget configuration."
 msgstr ""
 
-#: src/e_mod_places.c:622
+#: src/e_mod_places.c:599
+msgid "b"
+msgstr ""
+
+#: src/e_mod_places.c:604
+msgid "KB"
+msgstr ""
+
+#: src/e_mod_places.c:609
+msgid "MB"
+msgstr ""
+
+#: src/e_mod_places.c:614
+msgid "GB"
+msgstr ""
+
+#: src/e_mod_places.c:618
+msgid "TB"
+msgstr ""
+
+#: src/e_mod_places.c:653
 msgid "No Name"
 msgstr "Beze jména"
 
-#: src/e_mod_places.c:629
+#: src/e_mod_places.c:660
 msgid "free of"
 msgstr "volných z"
 
-#: src/e_mod_places.c:635
+#: src/e_mod_places.c:666
 #, c-format
 msgid "%s Not Mounted"
 msgstr "%s Není připojeno"
 
-#: src/e_mod_places.c:662
+#: src/e_mod_places.c:693
 msgid "unmount"
 msgstr "odpojit"
 
-#: src/e_mod_places.c:667
+#: src/e_mod_places.c:698
 msgid "eject"
 msgstr "vysunout"
+
+#: src/e_mod_udisks_eldbus.c:342
+msgid "Operation failed"
+msgstr ""
 
 #~ msgid "Configuration"
 #~ msgstr "Konfigurace"

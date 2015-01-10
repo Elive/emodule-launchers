@@ -6,31 +6,31 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: enlightenment\n"
-"Report-Msgid-Bugs-To: $MSGID_BUGS_ADDRESS\n"
-"POT-Creation-Date: 2013-08-24 11:51+0200\n"
+"Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
+"POT-Creation-Date: 2014-10-13 21:18+0200\n"
 "PO-Revision-Date: 2014-05-13 02:10+0000\n"
 "Last-Translator: Mantas Kriaučiūnas <mantas@akl.lt>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2014-05-14 05:46+0000\n"
 "X-Generator: Launchpad (build 17002)\n"
-"Language: lt\n"
 
-#: src/e_mod_config.c:54
+#: src/e_mod_config.c:55
 msgid "Places Settings"
 msgstr "Vietų įtaiso nustatymai"
 
-#: src/e_mod_config.c:136
+#: src/e_mod_config.c:138
 msgid "General"
 msgstr "Pagrindiniai"
 
-#: src/e_mod_config.c:139
+#: src/e_mod_config.c:141
 msgid "Show in main menu"
 msgstr "Rodyti pagrindiniame meniu"
 
-#: src/e_mod_config.c:143
+#: src/e_mod_config.c:145
 msgid "Hide the gadget header"
 msgstr ""
 
@@ -38,47 +38,47 @@ msgstr ""
 msgid "Auto close the popup"
 msgstr ""
 
-#: src/e_mod_config.c:147
+#: src/e_mod_config.c:153
 msgid "Mount volumes at boot"
 msgstr "Prijungti skirsnius (laikmenas) paleidžiant"
 
-#: src/e_mod_config.c:151
+#: src/e_mod_config.c:157
 msgid "Mount volumes on insert"
 msgstr "Prijungti laikmenas įkišus į kompiuterį"
 
-#: src/e_mod_config.c:155
+#: src/e_mod_config.c:161
 msgid "Open filemanager on insert"
 msgstr "Prijungus atverti failų naršyklę"
 
-#: src/e_mod_config.c:162
+#: src/e_mod_config.c:168
 msgid "Use a custom file manager"
 msgstr ""
 
-#: src/e_mod_config.c:175
+#: src/e_mod_config.c:181
 msgid "Show in menu"
 msgstr ""
 
-#: src/e_mod_config.c:178 src/e_mod_places.c:807
+#: src/e_mod_config.c:184 src/e_mod_places.c:800
 msgid "Home"
 msgstr "Asmeninis aplankas"
 
-#: src/e_mod_config.c:181 src/e_mod_places.c:816
+#: src/e_mod_config.c:187 src/e_mod_places.c:809
 msgid "Desktop"
 msgstr "Darbastalis"
 
-#: src/e_mod_config.c:184 src/e_mod_places.c:826
+#: src/e_mod_config.c:190 src/e_mod_places.c:818
 msgid "Trash"
 msgstr "Šiukšlinė"
 
-#: src/e_mod_config.c:187 src/e_mod_places.c:651 src/e_mod_places.c:835
+#: src/e_mod_config.c:193 src/e_mod_places.c:649 src/e_mod_places.c:827
 msgid "Filesystem"
 msgstr "Failų sistema"
 
-#: src/e_mod_config.c:190 src/e_mod_places.c:844
+#: src/e_mod_config.c:196 src/e_mod_places.c:836
 msgid "Temp"
 msgstr ""
 
-#: src/e_mod_config.c:193
+#: src/e_mod_config.c:199
 msgid "Favorites"
 msgstr "Žymelės"
 
@@ -86,46 +86,70 @@ msgstr "Žymelės"
 msgid "Files"
 msgstr "Failai"
 
-#: src/e_mod_main.c:61 src/e_mod_main.c:301 src/e_mod_places.c:273
-#: src/e_mod_places.c:901
+#: src/e_mod_main.c:61 src/e_mod_main.c:315 src/e_mod_places.c:265
+#: src/e_mod_places.c:893
 msgid "Places"
 msgstr "Vietos"
 
-#: src/e_mod_main.c:397
+#: src/e_mod_main.c:412
 msgid "Places Configuration Updated"
 msgstr ""
 
-#: src/e_mod_main.c:507
+#: src/e_mod_main.c:534
 msgid "Settings"
 msgstr "Nustatymai"
 
-#: src/e_mod_places.c:632
+#: src/e_mod_places.c:497
 msgid "Warning"
 msgstr "Dėmesio"
 
-#: src/e_mod_places.c:633
+#: src/e_mod_places.c:498
 msgid ""
 "<b>Cannot run the Enlightenment FileManager.</b><br>Please choose a custom "
 "file manager in<br>the gadget configuration."
 msgstr ""
 
-#: src/e_mod_places.c:655
+#: src/e_mod_places.c:599
+msgid "b"
+msgstr ""
+
+#: src/e_mod_places.c:604
+msgid "KB"
+msgstr ""
+
+#: src/e_mod_places.c:609
+msgid "MB"
+msgstr ""
+
+#: src/e_mod_places.c:614
+msgid "GB"
+msgstr ""
+
+#: src/e_mod_places.c:618
+msgid "TB"
+msgstr ""
+
+#: src/e_mod_places.c:653
 msgid "No Name"
 msgstr "Be pavadinimo"
 
-#: src/e_mod_places.c:662
+#: src/e_mod_places.c:660
 msgid "free of"
 msgstr ""
 
-#: src/e_mod_places.c:668
+#: src/e_mod_places.c:666
 #, c-format
 msgid "%s Not Mounted"
 msgstr "%s neprijungtas"
 
-#: src/e_mod_places.c:695
+#: src/e_mod_places.c:693
 msgid "unmount"
 msgstr "atjungti"
 
-#: src/e_mod_places.c:700
+#: src/e_mod_places.c:698
 msgid "eject"
 msgstr "išimti"
+
+#: src/e_mod_udisks_eldbus.c:342
+msgid "Operation failed"
+msgstr ""
