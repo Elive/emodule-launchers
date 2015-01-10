@@ -698,12 +698,14 @@ _places_volume_object_update(Volume *vol, Evas_Object *obj)
      }
 
    // the mount/eject icon
-   if (vol->mounted  && vol->mount_point && strcmp(vol->mount_point, "/"))
+   if (vol->mounted  && vol->mount_point && vol->mount_func &&
+       strcmp(vol->mount_point, "/"))
      {
         edje_object_signal_emit(obj, "icon,eject,show", "places");
         edje_object_part_text_set(obj, "eject_label", D_("unmount"));
      }
-   else if (!vol->mounted && (vol->requires_eject || vol->removable))
+   else if (!vol->mounted && vol->eject_func &&
+            (vol->requires_eject || vol->removable))
      {
         edje_object_signal_emit(obj, "icon,eject,show", "places");
         edje_object_part_text_set(obj, "eject_label", D_("eject"));
