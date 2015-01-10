@@ -3,7 +3,7 @@ dnl Process this file with autoconf to produce a configure script.
 # get rid of that stupid cache mechanism
 rm -f config.cache
 
-AC_INIT(places, 0.19, dave@gurumeditation.it)
+AC_INIT(places, 0.20, dave@gurumeditation.it)
 AC_PREREQ(2.52)
 AC_CONFIG_SRCDIR(configure.ac)
 AC_CANONICAL_BUILD
@@ -37,7 +37,7 @@ AM_CONDITIONAL([HAVE_PO], [false])
 AC_SUBST(LTLIBINTL)
 
 # check for Enlightenment
-PKG_CHECK_MODULES(E, [enlightenment >= 0.18.99])
+PKG_CHECK_MODULES(E, [enlightenment >= 0.19.99])
 release=$(pkg-config --variable=release enlightenment)
 MODULE_ARCH="$host_os-$host_cpu-$release"
 AC_SUBST(MODULE_ARCH)
