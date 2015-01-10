@@ -495,13 +495,16 @@ places_run_fm(const char *directory)
 
 /* Internals */
 static unsigned long long
-_places_free_space_get(const char *mount)
+_places_free_space_get(const char *mount, Volume *vol)
 {
    struct statvfs s;
 
    if (!mount) return 0;
    if (statvfs(mount, &s) != 0)
      return 0;
+
+   if ((vol->size == 0) && (s.f_blocks))
+     vol->size = (unsigned long long)s.f_blocks * (unsigned long long)s.f_frsize;
 
    return (unsigned long long)s.f_bavail * (unsigned long long)s.f_frsize;
 }
@@ -516,7 +519,7 @@ _places_poller(void *data)
    EINA_LIST_FOREACH(volumes, l, vol)
      if (vol->valid && vol->mounted)
      {
-        new = _places_free_space_get(vol->mount_point);
+        new = _places_free_space_get(vol->mount_point, vol);
         // redraw only if the size has changed more that 1Mb
         if (abs(new - vol->free_space) > 1024 * 1024)
           {
