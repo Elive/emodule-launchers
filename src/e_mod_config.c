@@ -31,7 +31,7 @@ static int _basic_apply(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata);
 
 /* External Functions */
 E_Config_Dialog *
-e_int_config_places_module(E_Comp *comp, const char *params)
+e_int_config_places_module(Evas_Object *parent, const char *params)
 {
    E_Config_Dialog *cfd = NULL;
    E_Config_Dialog_View *v = NULL;
@@ -52,7 +52,7 @@ e_int_config_places_module(E_Comp *comp, const char *params)
    snprintf(buf, sizeof(buf), "%s/e-module-places.edj", places_conf->module->dir);
 
    /* create new config dialog */
-   cfd = e_config_dialog_new(comp, D_("Places Settings"), "Places",
+   cfd = e_config_dialog_new(parent, D_("Places Settings"), "Places",
                              "fileman/places", buf, 0, v, NULL);
    places_conf->cfd = cfd;
    return cfd;

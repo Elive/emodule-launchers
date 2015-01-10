@@ -533,7 +533,7 @@ _places_cb_mouse_down(void *data, Evas *evas, Evas_Object *obj, void *event)
         mi = e_menu_item_new(m);
         e_menu_item_label_set(mi, D_("Settings"));
         e_util_menu_item_theme_icon_set(mi, "preferences-system");
-        e_menu_item_callback_set(mi, _places_cb_menu_configure, NULL);
+        e_menu_item_callback_set(mi, _places_cb_menu_configure, obj);
 
         /* Each Gadget Client has a utility menu from the Container */
         m = e_gadcon_client_util_menu_items_append(inst->gcc, m, 0);
@@ -568,5 +568,5 @@ _places_cb_menu_configure(void *data, E_Menu *mn, E_Menu_Item *mi)
 {
    if (!places_conf) return;
    if (places_conf->cfd) return;
-   e_int_config_places_module(mn->zone->comp, NULL);
+   e_int_config_places_module(data, NULL);
 }
