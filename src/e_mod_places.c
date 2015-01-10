@@ -237,18 +237,6 @@ places_fill_box(Evas_Object *main, Eina_Bool horiz)
 
    places_empty_box(main);
 
-   /*if (places_conf->show_home)
-      _places_custom_volume(box, D_("Home"), "e/icons/fileman/home", "/home/dave");
-   if (places_conf->show_desk)
-      _places_custom_volume(box, D_("Desktop"), "e/icons/fileman/desktop", "/home/dave/Desktop");
-   if (places_conf->show_trash)
-      _places_custom_volume(box, D_("Trash"), "e/icons/fileman/trash", "trash:///");
-   if (places_conf->show_root)
-      _places_custom_volume(box, D_("Filesystem"), "e/icons/fileman/root", "/");
-   if (places_conf->show_temp)
-      _places_custom_volume(box, D_("Temp"), "e/icons/fileman/tmp", "/tmp");
-   */
-
    // orient the edje box
    if (horiz)
       edje_object_signal_emit(main, "box,set,horiz", "places");
@@ -504,54 +492,6 @@ places_run_fm(const char *directory)
       places_popups_close();
 }
 
-void /* work in progrees */
-_places_custom_volume(Evas_Object *box, const char *label, const char *icon, const char *uri)
-{
-   int min_w, min_h, max_w, max_h;
-   Evas_Object *o, *i;
-
-   /* volume object */
-   o = edje_object_add(evas_object_evas_get(box));
-   edje_object_file_set(o, theme_file, "modules/places/volume");
-
-   /* icon */
-   i = edje_object_add(evas_object_evas_get(box));
-   //edje_object_file_set(icon, theme_file, vol->icon);
-   edje_object_file_set(i, e_theme_edje_file_get("base/theme/fileman", icon),
-                        icon);
-   edje_object_part_swallow(o, "icon", i);
-
-   /* label */
-   edje_object_part_text_set(o, "volume_label", label);
-
-   /* gauge */
-   edje_object_signal_emit(o, "gauge,hide", "places");
-   edje_object_part_text_set(o, "size_label", "");
-
-   /* orient the separator*/
-   if (!e_box_orientation_get(box))
-      edje_object_signal_emit(o, "separator,set,horiz", "places");
-   else
-      edje_object_signal_emit(o, "separator,set,vert", "places");
-
-   /* connect signals from edje */
-   edje_object_signal_callback_add(o, "icon,activated", "places",
-                                   _places_custom_icon_activated_cb, (void*)uri);
-
-   /* pack the volume in the box */
-   evas_object_show(o);
-   edje_object_size_min_get(o, &min_w, &min_h);
-   edje_object_size_max_get(o, &max_w, &max_h);
-   e_box_pack_end(box, o);
-   e_box_pack_options_set(o,
-                          1, 0, /* fill */
-                          1, 0, /* expand */
-                          0.5, 0.0, /* align */
-                          min_w, min_h, /* min */
-                          max_w, max_h /* max */
-                         );
-}
-
 
 /* Internals */
 static unsigned long long
@@ -715,12 +655,6 @@ _places_icon_activated_cb(void *data, Evas_Object *o, const char *emission, cons
         vol->force_open = EINA_TRUE;
         places_volume_mount(vol);
      }
-}
-
-void // work in progress
-_places_custom_icon_activated_cb(void *data, Evas_Object *o, const char *emission, const char *source)
-{
-   places_run_fm((const char*)data);
 }
 
 void
