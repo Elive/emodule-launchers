@@ -467,7 +467,7 @@ _places_popup_new(Instance *inst)
    inst->popup = popup;
 
    // build and fill the main edje object
-   inst->o_main = places_main_obj_create(e_comp_get(popup)->evas);
+   inst->o_main = places_main_obj_create(e_comp->evas);
    evas_object_event_callback_add(inst->o_main, EVAS_CALLBACK_MOUSE_DOWN,
                                   _places_cb_mouse_down, inst);
    places_fill_box(inst->o_main, EINA_FALSE);
