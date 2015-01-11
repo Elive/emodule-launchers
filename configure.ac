@@ -69,6 +69,17 @@ if test "x$want_eldbus" = "xno";then
    have_eldbus=no
 fi
 
+# check for mount (default enabled)
+#TODO here check if /etc/fstab and /proc/mounts exists
+have_mount=yes
+want_mount=yes
+AC_ARG_ENABLE([mount],
+   AS_HELP_STRING([--enable-mount],[enable mount fstab/mtab support @<:@default=enabled@:>@]), 
+   [want_mount=$enableval])
+if test "x$want_mount" = "xno";then
+   have_mount=no
+fi
+
 # check for eeze (default disabled)
 PKG_CHECK_MODULES([EEZE], [eeze >= 1.1.99],
                   [have_eeze="yes"], [have_eeze="no"])
@@ -86,6 +97,9 @@ test "x$have_eldbus" = "xyes" && AC_DEFINE_UNQUOTED([HAVE_ELDBUS], [1], [enable 
 
 AM_CONDITIONAL([HAVE_EEZE], [test "x$have_eeze" = "xyes"])
 test "x$have_eeze" = "xyes" && AC_DEFINE_UNQUOTED([HAVE_EEZE], [1], [enable eeze support])
+
+AM_CONDITIONAL([HAVE_MOUNT], [test "x$have_mount" = "xyes"])
+test "x$have_mount" = "xyes" && AC_DEFINE_UNQUOTED([HAVE_MOUNT], [1], [enable mount support])
 
 
 # homedir install
@@ -123,6 +137,7 @@ echo
 cat << DEVICE_EOF
 Device Backends:
  * build udisks (eldbus)....: $have_eldbus (default)
+ * build mount (fstab/mtab).: $have_mount (default)
  * build eeze...............: $have_eeze (experimental)
 DEVICE_EOF
 echo

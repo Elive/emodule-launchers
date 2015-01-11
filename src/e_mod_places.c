@@ -11,6 +11,10 @@
 #ifdef HAVE_ELDBUS
 # include "e_mod_udisks_eldbus.h"
 #endif
+#ifdef HAVE_MOUNT
+# include "e_mod_mount.h"
+#endif
+
 
 /* Local Function Prototypes */
 static Eina_Bool _places_poller(void *data);
@@ -44,6 +48,9 @@ places_init(void)
 #ifdef HAVE_ELDBUS
    places_udisks_eldbus_init();
 #endif
+#ifdef HAVE_MOUNT
+   places_mount_init();
+#endif
 
    snprintf(theme_file, PATH_MAX, "%s/e-module-places.edj",
             places_conf->module->dir);
@@ -63,6 +70,9 @@ places_shutdown(void)
 #endif
 #ifdef HAVE_ELDBUS
    places_udisks_eldbus_shutdown();
+#endif
+#ifdef HAVE_MOUNT
+   places_mount_shutdown();
 #endif
 }
 
