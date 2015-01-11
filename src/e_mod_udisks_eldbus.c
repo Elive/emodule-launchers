@@ -335,11 +335,12 @@ _places_udisks_volume_task_cb(void *data, const Eldbus_Message *msg,
                               Eldbus_Pending *pending)
 {
    char *str;
+   Eina_Bool ret;
 
    if (eldbus_message_error_get(msg, NULL, NULL))
    {
-      eldbus_message_arguments_get(msg,"s", &str);
-      e_util_dialog_internal(D_("Operation failed"), str);
+      ret = eldbus_message_arguments_get(msg, "s", &str);
+      e_util_dialog_internal(D_("Operation failed"), ret ? str : NULL);
    }
 }
 
