@@ -653,7 +653,7 @@ _places_volume_object_update(Volume *vol, Evas_Object *obj)
      }
 
    // the mount/eject icon
-   if (vol->mounted  && vol->mount_point && vol->mount_func &&
+   if (vol->mounted  && vol->mount_point && vol->unmount_func &&
        strcmp(vol->mount_point, "/"))
      {
         edje_object_signal_emit(obj, "icon,eject,show", "places");
@@ -678,7 +678,7 @@ _places_icon_activated_cb(void *data, Evas_Object *o, const char *emission, cons
 
    if (vol->mounted)
      places_run_fm(vol->mount_point);
-   else
+   else if (vol->mount_func)
      {
         vol->force_open = EINA_TRUE;
         places_volume_mount(vol);

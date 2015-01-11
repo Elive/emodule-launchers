@@ -5,16 +5,87 @@
 #ifdef HAVE_MOUNT
 
 #include <e.h>
+#include "e_mod_main.h"
 #include "e_mod_places.h"
 
 
 
 #define FSTAB_FILE "/etc/fstab"
 #define MTAB_FILE "/proc/mounts"
+#define MOUNT_TAG "places_mount"
+#define UMOUNT_TAG "places_umount"
 
 static Ecore_Timer *mtab_timer = NULL;
 static Eina_List *know_mounts = NULL;
+static Ecore_Event_Handler *eeh1 = NULL;
+static Ecore_Event_Handler *eeh2 = NULL;
 
+
+static Eina_Bool
+_places_mount_exe_del_cb(void *data EINA_UNUSED, int type EINA_UNUSED, void *event)
+{
+   Ecore_Exe_Event_Del *e = (Ecore_Exe_Event_Del *)event;
+   const char *tag = ecore_exe_tag_get(e->exe);
+
+   if (!tag || (strcmp(tag, MOUNT_TAG) && strcmp(tag, UMOUNT_TAG)))
+      return ECORE_CALLBACK_PASS_ON;
+
+   Volume *vol = ecore_exe_data_get(e->exe);
+   if (vol && (e->exit_code == 0))
+   {
+      vol->mounted = strcmp(tag, MOUNT_TAG) ? EINA_FALSE : EINA_TRUE;
+      places_volume_update(vol);
+   }
+   return ECORE_CALLBACK_DONE;
+}
+
+static Eina_Bool
+_places_mount_exe_error_cb(void *data EINA_UNUSED, int type EINA_UNUSED, void *event)
+{
+   Ecore_Exe_Event_Data *e = (Ecore_Exe_Event_Data *)event;
+   const char *tag = ecore_exe_tag_get(e->exe);
+
+   if (!tag || (strcmp(tag, MOUNT_TAG) && strcmp(tag, UMOUNT_TAG)))
+      return ECORE_CALLBACK_PASS_ON;
+
+   Ecore_Exe_Event_Data_Line line = e->lines[0];
+   e_util_dialog_internal(D_("Operation failed"),
+                          line.size ? line.line : D_("Unknown error"));
+
+   return ECORE_CALLBACK_DONE;
+}
+
+static void
+_places_mount_mount_func(Volume *vol, Eina_List *opts)
+{
+   char cmd[4096];
+   Ecore_Exe *exe;
+
+   snprintf(cmd, sizeof(cmd), "mount %s", vol->mount_point);
+   exe = ecore_exe_pipe_run(cmd, ECORE_EXE_PIPE_ERROR_LINE_BUFFERED |
+                                 ECORE_EXE_PIPE_ERROR |
+                                 ECORE_EXE_TERM_WITH_PARENT, vol);
+   ecore_exe_tag_set(exe, MOUNT_TAG);
+}
+
+static void
+_places_mount_unmount_func(Volume *vol, Eina_List *opts)
+{
+   char cmd[4096];
+   Ecore_Exe *exe;
+
+   snprintf(cmd, sizeof(cmd), "umount %s", vol->mount_point);
+   exe = ecore_exe_pipe_run(cmd, ECORE_EXE_PIPE_ERROR_LINE_BUFFERED |
+                                 ECORE_EXE_PIPE_ERROR |
+                                 ECORE_EXE_TERM_WITH_PARENT, vol);
+   ecore_exe_tag_set(exe, UMOUNT_TAG);
+}
+
+static void
+_places_mount_free_func(Volume *vol)
+{
+   know_mounts = eina_list_remove(know_mounts, vol);
+}
 
 void
 _places_mount_volume_add(const char *mpoint, const char *fstype)
@@ -28,6 +99,10 @@ _places_mount_volume_add(const char *mpoint, const char *fstype)
    eina_stringshare_replace(&vol->label,  ecore_file_file_get(mpoint));
    eina_stringshare_replace(&vol->mount_point, mpoint);
    eina_stringshare_replace(&vol->fstype, fstype);
+
+   vol->mount_func = _places_mount_mount_func;
+   vol->unmount_func = _places_mount_unmount_func;
+   vol->free_func = _places_mount_free_func;
 
    know_mounts = eina_list_append(know_mounts, vol);
 }
@@ -174,7 +249,12 @@ places_mount_init(void)
    _places_mount_fstab_parse();
    _places_mount_mtab_parse();
 
+   eeh1 = ecore_event_handler_add(ECORE_EXE_EVENT_DEL,
+                                  _places_mount_exe_del_cb, NULL);
+   eeh2 = ecore_event_handler_add(ECORE_EXE_EVENT_ERROR,
+                                  _places_mount_exe_error_cb, NULL);
    mtab_timer = ecore_timer_add(4.0, _places_mount_mtab_timer_cb, NULL);
+
    return EINA_TRUE;
 }
 
@@ -182,8 +262,10 @@ void
 places_mount_shutdown(void)
 {
    printf("PLACES: mtab: shutdown()\n");
-   if (mtab_timer) ecore_timer_del(mtab_timer);
-   if (know_mounts) eina_list_free(know_mounts);
+   E_FREE_FUNC(mtab_timer, ecore_timer_del);
+   E_FREE_FUNC(know_mounts, eina_list_free);
+   E_FREE_FUNC(eeh1, ecore_event_handler_del);
+   E_FREE_FUNC(eeh2, ecore_event_handler_del);
 }
 
 
