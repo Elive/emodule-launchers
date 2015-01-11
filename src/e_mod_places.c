@@ -705,9 +705,25 @@ _places_header_activated_cb(void *data, Evas_Object *o, const char *emission, co
 
 /* E17 menu augmentation */
 void
-_places_menu_cb(void *data, E_Menu *m, E_Menu_Item *mi)
+_places_menu_folder_cb(void *data, E_Menu *m, E_Menu_Item *mi)
 {
-   places_run_fm(data);
+   const char *folder = data;
+
+   places_run_fm(folder);
+}
+
+void
+_places_menu_volume_cb(void *data, E_Menu *m, E_Menu_Item *mi)
+{
+   Volume *vol = data;
+
+   if (vol->mounted)
+     places_run_fm(vol->mount_point);
+   else if (vol->mount_func)
+     {
+        vol->force_open = EINA_TRUE;
+        places_volume_mount(vol);
+     }
 }
 
 static void
@@ -741,7 +757,7 @@ _places_bookmarks_parse(E_Menu *em)
                   e_menu_item_label_set(mi, alias ? alias :
                                         ecore_file_file_get(uri->path));
                   e_util_menu_item_theme_icon_set(mi, "folder");
-                  e_menu_item_callback_set(mi, _places_menu_cb,
+                  e_menu_item_callback_set(mi, _places_menu_folder_cb,
                                            strdup(uri->path)); //TODO free somewhere
                }
              if (uri) efreet_uri_free(uri);
@@ -761,7 +777,7 @@ places_generate_menu(void *data, E_Menu *em)
         mi = e_menu_item_new(em);
         e_menu_item_label_set(mi, D_("Home"));
         e_util_menu_item_theme_icon_set(mi, "user-home");
-        e_menu_item_callback_set(mi, _places_menu_cb, e_user_homedir_get());
+        e_menu_item_callback_set(mi, _places_menu_folder_cb, e_user_homedir_get());
      }
 
    // Desktop
@@ -770,7 +786,7 @@ places_generate_menu(void *data, E_Menu *em)
         mi = e_menu_item_new(em);
         e_menu_item_label_set(mi, D_("Desktop"));
         e_util_menu_item_theme_icon_set(mi, "user-desktop");
-        e_menu_item_callback_set(mi, _places_menu_cb, efreet_desktop_dir_get());
+        e_menu_item_callback_set(mi, _places_menu_folder_cb, efreet_desktop_dir_get());
      }
 
    // Trash
@@ -779,7 +795,7 @@ places_generate_menu(void *data, E_Menu *em)
         mi = e_menu_item_new(em);
         e_menu_item_label_set(mi, D_("Trash"));
         e_util_menu_item_theme_icon_set(mi, "user-trash");
-        e_menu_item_callback_set(mi, _places_menu_cb, "trash:///");
+        e_menu_item_callback_set(mi, _places_menu_folder_cb, "trash:///");
      }
 
    // File System
@@ -788,7 +804,7 @@ places_generate_menu(void *data, E_Menu *em)
         mi = e_menu_item_new(em);
         e_menu_item_label_set(mi, D_("Filesystem"));
         e_util_menu_item_theme_icon_set(mi, "drive-harddisk");
-        e_menu_item_callback_set(mi, _places_menu_cb, "/");
+        e_menu_item_callback_set(mi, _places_menu_folder_cb, "/");
      }
 
    // Temp
@@ -797,7 +813,7 @@ places_generate_menu(void *data, E_Menu *em)
         mi = e_menu_item_new(em);
         e_menu_item_label_set(mi, D_("Temp"));
         e_util_menu_item_theme_icon_set(mi, "user-temp");
-        e_menu_item_callback_set(mi, _places_menu_cb, "/tmp");
+        e_menu_item_callback_set(mi, _places_menu_folder_cb, "/tmp");
      }
 
    // Separator
@@ -827,7 +843,7 @@ places_generate_menu(void *data, E_Menu *em)
         if (vol->icon)
           e_util_menu_item_theme_icon_set(mi, vol->icon);
 
-        e_menu_item_callback_set(mi, _places_menu_cb, vol->mount_point);
+        e_menu_item_callback_set(mi, _places_menu_volume_cb, vol);
         volumes_visible = 1;
      }
 
