@@ -5,21 +5,21 @@
 
 struct _E_Config_Dialog_Data
 {
-   int auto_mount;
-   int boot_mount;
-   int auto_open;
-   char *fm;
-   int fm_chk;
+   Eina_Bool auto_mount;
+   Eina_Bool boot_mount;
+   Eina_Bool auto_open;
+   Eina_Bool fm_chk;
+   Eina_Bool show_menu;
+   Eina_Bool hide_header;
+   Eina_Bool autoclose_popup;
+   Eina_Bool show_home;
+   Eina_Bool show_desk;
+   Eina_Bool show_trash;
+   Eina_Bool show_root;
+   Eina_Bool show_temp;
+   Eina_Bool show_bookm;
    Evas_Object *entry;
-   int show_menu;
-   int hide_header;
-   int autoclose_popup;
-   int show_home;
-   int show_desk;
-   int show_trash;
-   int show_root;
-   int show_temp;
-   int show_bookm;
+   Evas_Object *auto_open_chk;
 };
 
 /* Local Function Prototypes */
@@ -72,7 +72,6 @@ _create_data(E_Config_Dialog *cfd)
 static void
 _free_data(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata)
 {
-   free(cfdata->fm);
    places_conf->cfd = NULL;
    E_FREE(cfdata);
 }
@@ -84,7 +83,6 @@ _fill_data(E_Config_Dialog_Data *cfdata)
    cfdata->auto_mount = places_conf->auto_mount;
    cfdata->boot_mount = places_conf->boot_mount;
    cfdata->auto_open = places_conf->auto_open;
-
    cfdata->show_menu = places_conf->show_menu;
    cfdata->hide_header = places_conf->hide_header;
    cfdata->autoclose_popup = places_conf->autoclose_popup;
@@ -94,115 +92,125 @@ _fill_data(E_Config_Dialog_Data *cfdata)
    cfdata->show_root = places_conf->show_root;
    cfdata->show_temp = places_conf->show_temp;
    cfdata->show_bookm = places_conf->show_bookm;
-
-   if (places_conf->fm)
-     cfdata->fm = strdup(places_conf->fm);
-   else
-     cfdata->fm = strdup("");
 }
 
-void _custom_fm_click(void *data, Evas_Object *obj)
+static void
+_mount_on_insert_chk_changed_cb(void *data, Evas_Object *obj, void *event __UNUSED__)
 {
    E_Config_Dialog_Data *cfdata = data;
 
-   if (e_widget_check_checked_get(obj))
-     e_widget_disabled_set(cfdata->entry, 0);
+   if (elm_check_state_get(obj))
+     elm_object_disabled_set(cfdata->auto_open_chk, EINA_FALSE);
    else
      {
-        e_widget_disabled_set(cfdata->entry, 1);
-        e_widget_entry_text_set(cfdata->entry, "");
+        elm_object_disabled_set(cfdata->auto_open_chk, EINA_TRUE);
+        elm_check_state_set(cfdata->auto_open_chk, EINA_FALSE);
      }
 }
 
-void _mount_on_insert_click(void *data, Evas_Object *obj)
+static void
+_custom_fm_chk_changed_cb(void *data, Evas_Object *obj, void *event __UNUSED__)
 {
-   Evas_Object *ow = data;
+   Evas_Object *en = data;
 
-   if (e_widget_check_checked_get(obj))
-     e_widget_disabled_set(ow, 0);
-   else
-     {
-        e_widget_check_checked_set(ow, 0);
-        e_widget_disabled_set(ow, 1);
-     }
+   elm_object_disabled_set(en, !elm_check_state_get(obj));
+   if (!elm_check_state_get(obj))
+     elm_object_text_set(en, NULL);
 }
+
+static void
+_all_changed_cb(void *data, Evas_Object *obj __UNUSED__, void *event __UNUSED__)
+{
+   e_config_dialog_changed_set((E_Config_Dialog *)data, EINA_TRUE);
+}
+
+#define CHECKBOX(_text_, _pointer_)                                      \
+   chk = elm_check_add(box2);                                            \
+   elm_object_text_set(chk, _text_);                                     \
+   elm_check_state_pointer_set(chk, _pointer_);                          \
+   evas_object_smart_callback_add(chk, "changed", _all_changed_cb, cfd); \
+   E_EXPAND(chk);                                                        \
+   E_FILL(chk);                                                          \
+   elm_box_pack_end(box2, chk);                                          \
+   evas_object_show(chk);
 
 static Evas_Object *
 _basic_create(E_Config_Dialog *cfd, Evas *evas, E_Config_Dialog_Data *cfdata)
 {
-   Evas_Object *o = NULL, *of = NULL, *ow = NULL, *ow1 = NULL;
+   Evas_Object *win = cfd->dia->win;
+   Evas_Object *box, *box2, *frame, *chk, *en;
 
-   o = e_widget_list_add(evas, 0, 0);
+   box = elm_box_add(win);
+   E_EXPAND(box); E_FILL(box);
+   evas_object_show(box);
 
-   //General frame
-   of = e_widget_framelist_add(evas, D_("General"), 0);
-   e_widget_framelist_content_align_set(of, 0.0, 0.0);
+   // general
+   frame = elm_frame_add(box);
+   elm_object_text_set(frame, D_("General"));
+   E_EXPAND(frame); E_FILL(frame);
+   elm_box_pack_end(box, frame);
+   evas_object_show(frame);
 
-   ow = e_widget_check_add(evas, D_("Show in main menu"),
-                           &(cfdata->show_menu));
-   e_widget_framelist_object_append(of, ow);
+   box2 = elm_box_add(win);
+   E_EXPAND(box2); E_FILL(box2);
+   elm_object_content_set(frame, box2);
+   evas_object_show(box2);
 
-   ow = e_widget_check_add(evas, D_("Hide the gadget header"),
-                           &(cfdata->hide_header));
-   e_widget_framelist_object_append(of, ow);
+   CHECKBOX(D_("Show in main menu"), &cfdata->show_menu);
+   CHECKBOX(D_("Hide the gadget header"), &cfdata->hide_header);
+   CHECKBOX(D_("Auto close the popup"), &cfdata->autoclose_popup);
+   CHECKBOX(D_("Mount volumes at boot"), &cfdata->boot_mount);
+   CHECKBOX(D_("Mount volumes on insert"), &cfdata->auto_mount);
+   evas_object_smart_callback_add(chk, "changed", _mount_on_insert_chk_changed_cb, cfdata);
+   CHECKBOX(D_("Open filemanager on insert"), &cfdata->auto_open);
+   elm_object_disabled_set(chk, !cfdata->auto_mount);
+   cfdata->auto_open_chk = chk;
 
-   ow = e_widget_check_add(evas, D_("Auto close the popup"),
-                           &(cfdata->autoclose_popup));
-   e_widget_framelist_object_append(of, ow);
+   // custom fm chk + entry
+   en = elm_entry_add(win);
 
-   ow = e_widget_check_add(evas, D_("Mount volumes at boot"),
-                           &(cfdata->boot_mount));
-   e_widget_framelist_object_append(of, ow);
+   chk = elm_check_add(box2);
+   elm_object_text_set(chk, D_("Use a custom file manager"));
+   elm_check_state_set(chk, places_conf->fm ? EINA_TRUE : EINA_FALSE);
+   evas_object_smart_callback_add(chk, "changed", _custom_fm_chk_changed_cb, en);
+   evas_object_smart_callback_add(chk, "changed", _all_changed_cb, cfd);
+   E_EXPAND(chk); E_FILL(chk);
+   elm_box_pack_end(box2, chk);
+   evas_object_show(chk);
 
-   ow1 = e_widget_check_add(evas, D_("Mount volumes on insert"),
-                           &(cfdata->auto_mount));
-   e_widget_framelist_object_append(of, ow1);
+   elm_entry_scrollable_set(en, EINA_TRUE);
+   elm_entry_single_line_set(en, EINA_TRUE);
+   elm_object_text_set(en, places_conf->fm);
+   elm_object_disabled_set(en, !elm_check_state_get(chk));
+   evas_object_smart_callback_add(en, "changed,user", _all_changed_cb, cfd);
+   E_EXPAND(en); E_FILL(en);
+   elm_box_pack_end(box2, en);
+   evas_object_show(en);
+   cfdata->entry = en;
 
-   ow = e_widget_check_add(evas, D_("Open filemanager on insert"),
-                           &(cfdata->auto_open));
-   e_widget_framelist_object_append(of, ow);
-   e_widget_on_change_hook_set(ow1, _mount_on_insert_click, ow);
-   if (!cfdata->auto_mount)
-     e_widget_disabled_set(ow, 1);
+   // show in menu
+   frame = elm_frame_add(box);
+   elm_object_text_set(frame, D_("Show in menu"));
+   E_EXPAND(frame); E_FILL(frame);
+   elm_box_pack_end(box, frame);
+   evas_object_show(frame);
 
-   ow = e_widget_check_add(evas, D_("Use a custom file manager"), &(cfdata->fm_chk));
-   e_widget_check_checked_set(ow, strlen(cfdata->fm) > 0 ? 1 : 0);
-   e_widget_on_change_hook_set(ow, _custom_fm_click, cfdata);
-   e_widget_framelist_object_append(of, ow);
+   box2 = elm_box_add(win);
+   E_EXPAND(box2); E_FILL(box2);
+   elm_object_content_set(frame, box2);
+   evas_object_show(box2);
 
-   ow = e_widget_entry_add(evas, &(cfdata->fm), NULL, NULL, NULL);
-   e_widget_disabled_set(ow, strlen(cfdata->fm) > 0 ? 0 : 1);
-   cfdata->entry = ow;
-   e_widget_framelist_object_append(of, ow);
+   CHECKBOX(D_("Home"), &cfdata->show_home);
+   CHECKBOX(D_("Desktop"), &cfdata->show_desk);
+   CHECKBOX(D_("Trash"), &cfdata->show_trash);
+   CHECKBOX(D_("Filesystem"), &cfdata->show_root);
+   CHECKBOX(D_("Temp"), &cfdata->show_temp);
+   CHECKBOX(D_("Favorites"), &cfdata->show_bookm);
 
-   e_widget_list_object_append(o, of, 1, 1, 0.5);
-
-   //Display frame
-   of = e_widget_framelist_add(evas, D_("Show in menu"), 0);
-   e_widget_framelist_content_align_set(of, 0.0, 0.0);
-
-   ow = e_widget_check_add(evas, D_("Home"), &(cfdata->show_home));
-   e_widget_framelist_object_append(of, ow);
-
-   ow = e_widget_check_add(evas, D_("Desktop"), &(cfdata->show_desk));
-   e_widget_framelist_object_append(of, ow);
-
-   ow = e_widget_check_add(evas, D_("Trash"), &(cfdata->show_trash));
-   e_widget_framelist_object_append(of, ow);
-
-   ow = e_widget_check_add(evas, D_("Filesystem"), &(cfdata->show_root));
-   e_widget_framelist_object_append(of, ow);
-
-   ow = e_widget_check_add(evas, D_("Temp"), &(cfdata->show_temp));
-   e_widget_framelist_object_append(of, ow);
-
-   ow = e_widget_check_add(evas, D_("Favorites"), &(cfdata->show_bookm));
-   e_widget_framelist_object_append(of, ow);
-
-   e_widget_list_object_append(o, of, 1, 1, 0.5);
-
-   return o;
+   return box;
 }
+
+#undef CHECKBOX
 
 static int
 _basic_apply(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata)
@@ -220,9 +228,8 @@ _basic_apply(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata)
    places_conf->show_temp = cfdata->show_temp;
    places_conf->show_bookm = cfdata->show_bookm;
 
-   const char *fm = eina_stringshare_add(cfdata->fm);
    eina_stringshare_del(places_conf->fm);
-   places_conf->fm = fm;
+   places_conf->fm = eina_stringshare_add(elm_object_text_get(cfdata->entry));
 
    e_config_save_queue();
    places_update_all_gadgets();
