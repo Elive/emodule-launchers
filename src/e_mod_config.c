@@ -171,7 +171,8 @@ _basic_create(E_Config_Dialog *cfd, Evas *evas, E_Config_Dialog_Data *cfdata)
 
    chk = elm_check_add(box2);
    elm_object_text_set(chk, D_("Use a custom file manager"));
-   elm_check_state_set(chk, places_conf->fm ? EINA_TRUE : EINA_FALSE);
+   if (places_conf->fm && places_conf->fm[0] != '\0')
+     elm_check_state_set(chk, EINA_TRUE);
    evas_object_smart_callback_add(chk, "changed", _custom_fm_chk_changed_cb, en);
    evas_object_smart_callback_add(chk, "changed", _all_changed_cb, cfd);
    E_EXPAND(chk); E_FILL(chk);
