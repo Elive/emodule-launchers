@@ -2,21 +2,24 @@
 # Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
 # This file is distributed under the same license as the enlightenment package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+# Саша Петровић <salepetronije@gmail.com>, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: enlightenment\n"
-"Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-10-13 21:18+0200\n"
-"PO-Revision-Date: 2013-06-24 09:31+0000\n"
+"Report-Msgid-Bugs-To: $MSGID_BUGS_ADDRESS\n"
+"POT-Creation-Date: 2015-01-18 20:52+0100\n"
+"PO-Revision-Date: 2015-01-31 16:25+0100\n"
 "Last-Translator: Саша Петровић <salepetronije@gmail.com>\n"
-"Language-Team: Serbian <sr@li.org>\n"
-"Language: sr\n"
+"Language-Team: српски <xfce4@xfce4.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-25 05:04+0000\n"
-"X-Generator: Launchpad (build 16738)\n"
+"X-Launchpad-Export-Date: 2015-01-20 06:21+0000\n"
+"X-Generator: Gtranslator 2.91.6\n"
+"Language: sr\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: src/e_mod_config.c:55
 msgid "Places Settings"
@@ -58,23 +61,23 @@ msgstr "Користи прилагођеног управника датоте�
 msgid "Show in menu"
 msgstr "Прикажи у изборнику"
 
-#: src/e_mod_config.c:184 src/e_mod_places.c:800
+#: src/e_mod_config.c:184 src/e_mod_places.c:783
 msgid "Home"
 msgstr "Почетна"
 
-#: src/e_mod_config.c:187 src/e_mod_places.c:809
+#: src/e_mod_config.c:187 src/e_mod_places.c:792
 msgid "Desktop"
 msgstr "Радна површ"
 
-#: src/e_mod_config.c:190 src/e_mod_places.c:818
+#: src/e_mod_config.c:190 src/e_mod_places.c:801
 msgid "Trash"
 msgstr "Смеће"
 
-#: src/e_mod_config.c:193 src/e_mod_places.c:649 src/e_mod_places.c:827
+#: src/e_mod_config.c:193 src/e_mod_places.c:615 src/e_mod_places.c:810
 msgid "Filesystem"
 msgstr "Систем датотека"
 
-#: src/e_mod_config.c:196 src/e_mod_places.c:836
+#: src/e_mod_config.c:196 src/e_mod_places.c:819
 msgid "Temp"
 msgstr "Привремена"
 
@@ -86,8 +89,8 @@ msgstr "Омиљено"
 msgid "Files"
 msgstr "Датотеке"
 
-#: src/e_mod_main.c:61 src/e_mod_main.c:315 src/e_mod_places.c:265
-#: src/e_mod_places.c:893
+#: src/e_mod_main.c:61 src/e_mod_main.c:315 src/e_mod_places.c:263
+#: src/e_mod_places.c:876
 msgid "Places"
 msgstr "Места"
 
@@ -99,11 +102,11 @@ msgstr "Поставке места су освежене"
 msgid "Settings"
 msgstr "Поставке"
 
-#: src/e_mod_places.c:497
+#: src/e_mod_places.c:508
 msgid "Warning"
 msgstr "Упозорење"
 
-#: src/e_mod_places.c:498
+#: src/e_mod_places.c:509
 msgid ""
 "<b>Cannot run the Enlightenment FileManager.</b><br>Please choose a custom "
 "file manager in<br>the gadget configuration."
@@ -111,47 +114,51 @@ msgstr ""
 "<b>Нисам успео да покренем управника датотека Просвећења.</b><br>Изаберите "
 "прилагођеног управника датотека у<br>поставкама справице."
 
-#: src/e_mod_places.c:599
+#: src/e_mod_places.c:565
 msgid "b"
-msgstr ""
+msgstr "b"
 
-#: src/e_mod_places.c:604
+#: src/e_mod_places.c:570
 msgid "KB"
-msgstr ""
+msgstr "KB"
 
-#: src/e_mod_places.c:609
+#: src/e_mod_places.c:575
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
-#: src/e_mod_places.c:614
+#: src/e_mod_places.c:580
 msgid "GB"
-msgstr ""
+msgstr "GB"
 
-#: src/e_mod_places.c:618
+#: src/e_mod_places.c:584
 msgid "TB"
-msgstr ""
+msgstr "TB"
 
-#: src/e_mod_places.c:653
+#: src/e_mod_places.c:619
 msgid "No Name"
 msgstr "Без имена"
 
-#: src/e_mod_places.c:660
+#: src/e_mod_places.c:626
 msgid "free of"
-msgstr ""
+msgstr "слободно од"
 
-#: src/e_mod_places.c:666
+#: src/e_mod_places.c:632
 #, c-format
 msgid "%s Not Mounted"
 msgstr "%s није прикачен"
 
-#: src/e_mod_places.c:693
+#: src/e_mod_places.c:660
 msgid "unmount"
 msgstr "откачи"
 
-#: src/e_mod_places.c:698
+#: src/e_mod_places.c:666
 msgid "eject"
 msgstr "избаци"
 
-#: src/e_mod_udisks_eldbus.c:342
+#: src/e_mod_udisks_eldbus.c:343
 msgid "Operation failed"
-msgstr ""
+msgstr "Радња није успела"
+
+#: src/e_mod_udisks_eldbus.c:344
+msgid "Unknown error"
+msgstr "Непозната грешка"
