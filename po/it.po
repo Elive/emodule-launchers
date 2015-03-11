@@ -6,11 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Places\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-10-13 21:18+0200\n"
-"PO-Revision-Date: 2013-05-02 19:33+0200\n"
+"POT-Creation-Date: 2015-03-11 18:38+0100\n"
+"PO-Revision-Date: 2015-03-11 18:39+0100\n"
 "Last-Translator: DaveMDS <dave@gurumeditation.it>\n"
 "Language-Team: none\n"
-"Language: \n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,63 +19,63 @@ msgstr ""
 msgid "Places Settings"
 msgstr "Impostazioni di Places"
 
-#: src/e_mod_config.c:138
+#: src/e_mod_config.c:149
 msgid "General"
 msgstr "Impostazioni generali"
 
-#: src/e_mod_config.c:141
+#: src/e_mod_config.c:159
 msgid "Show in main menu"
 msgstr "Mostra nel menù principale"
 
-#: src/e_mod_config.c:145
+#: src/e_mod_config.c:160
 msgid "Hide the gadget header"
 msgstr "Nascondi intestazione gadget"
 
-#: src/e_mod_config.c:149
+#: src/e_mod_config.c:161
 msgid "Auto close the popup"
 msgstr "Chiudi il popup automaticamente"
 
-#: src/e_mod_config.c:153
+#: src/e_mod_config.c:162
 msgid "Mount volumes at boot"
 msgstr "Monta i dispositivi all'avvio"
 
-#: src/e_mod_config.c:157
+#: src/e_mod_config.c:163
 msgid "Mount volumes on insert"
 msgstr "Monta i dispositivi collegati"
 
-#: src/e_mod_config.c:161
+#: src/e_mod_config.c:165
 msgid "Open filemanager on insert"
 msgstr "Apri i dispositivi collegati"
 
-#: src/e_mod_config.c:168
+#: src/e_mod_config.c:173
 msgid "Use a custom file manager"
 msgstr "Usa filemanager personalizzato"
 
-#: src/e_mod_config.c:181
+#: src/e_mod_config.c:194
 msgid "Show in menu"
 msgstr "Mostra nel menù"
 
-#: src/e_mod_config.c:184 src/e_mod_places.c:800
+#: src/e_mod_config.c:204 src/e_mod_places.c:783
 msgid "Home"
 msgstr "Home"
 
-#: src/e_mod_config.c:187 src/e_mod_places.c:809
+#: src/e_mod_config.c:205 src/e_mod_places.c:792
 msgid "Desktop"
 msgstr "Desktop"
 
-#: src/e_mod_config.c:190 src/e_mod_places.c:818
+#: src/e_mod_config.c:206 src/e_mod_places.c:801
 msgid "Trash"
 msgstr "Cestino"
 
-#: src/e_mod_config.c:193 src/e_mod_places.c:649 src/e_mod_places.c:827
+#: src/e_mod_config.c:207 src/e_mod_places.c:615 src/e_mod_places.c:810
 msgid "Filesystem"
 msgstr "Filesystem"
 
-#: src/e_mod_config.c:196 src/e_mod_places.c:836
+#: src/e_mod_config.c:208 src/e_mod_places.c:819
 msgid "Temp"
 msgstr "Temporanei"
 
-#: src/e_mod_config.c:199
+#: src/e_mod_config.c:209
 msgid "Favorites"
 msgstr "Preferiti"
 
@@ -83,8 +83,8 @@ msgstr "Preferiti"
 msgid "Files"
 msgstr "File"
 
-#: src/e_mod_main.c:61 src/e_mod_main.c:315 src/e_mod_places.c:265
-#: src/e_mod_places.c:893
+#: src/e_mod_main.c:61 src/e_mod_main.c:315 src/e_mod_places.c:263
+#: src/e_mod_places.c:876
 msgid "Places"
 msgstr "Risorse"
 
@@ -96,11 +96,11 @@ msgstr "La configurazione di Places è aggiornata"
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: src/e_mod_places.c:497
+#: src/e_mod_places.c:508
 msgid "Warning"
 msgstr "Avviso"
 
-#: src/e_mod_places.c:498
+#: src/e_mod_places.c:509
 msgid ""
 "<b>Cannot run the Enlightenment FileManager.</b><br>Please choose a custom "
 "file manager in<br>the gadget configuration."
@@ -108,47 +108,51 @@ msgstr ""
 "<b>Impossibile eseguire il file manager di Enlightenment.</b><br>Si prega di "
 "impostare un altro file manager<br>nella configurazione del gadget."
 
-#: src/e_mod_places.c:599
+#: src/e_mod_places.c:565
 msgid "b"
-msgstr ""
+msgstr "b"
 
-#: src/e_mod_places.c:604
+#: src/e_mod_places.c:570
 msgid "KB"
-msgstr ""
+msgstr "KB"
 
-#: src/e_mod_places.c:609
+#: src/e_mod_places.c:575
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
-#: src/e_mod_places.c:614
+#: src/e_mod_places.c:580
 msgid "GB"
-msgstr ""
+msgstr "GB"
 
-#: src/e_mod_places.c:618
+#: src/e_mod_places.c:584
 msgid "TB"
-msgstr ""
+msgstr "TB"
 
-#: src/e_mod_places.c:653
+#: src/e_mod_places.c:619
 msgid "No Name"
 msgstr "Senza nome"
 
-#: src/e_mod_places.c:660
+#: src/e_mod_places.c:626
 msgid "free of"
 msgstr "liberi di"
 
-#: src/e_mod_places.c:666
+#: src/e_mod_places.c:632
 #, c-format
 msgid "%s Not Mounted"
 msgstr "%s non è montato"
 
-#: src/e_mod_places.c:693
+#: src/e_mod_places.c:660
 msgid "unmount"
 msgstr "smonta"
 
-#: src/e_mod_places.c:698
+#: src/e_mod_places.c:666
 msgid "eject"
 msgstr "espelli"
 
-#: src/e_mod_udisks_eldbus.c:342
+#: src/e_mod_udisks_eldbus.c:343
 msgid "Operation failed"
-msgstr ""
+msgstr "Operazione non riuscita"
+
+#: src/e_mod_udisks_eldbus.c:344
+msgid "Unknown error"
+msgstr "Errore sconosciuto"
