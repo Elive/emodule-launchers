@@ -597,7 +597,7 @@ _places_run_fm_external(const char *fm, const char *directory)
    char exec[PATH_MAX];
 
    snprintf(exec, PATH_MAX, "%s \"%s\"", (char*)fm, (char*)directory);
-   e_exec(e_zone_current_get(e_comp), NULL, exec, NULL, NULL);
+   e_exec(e_zone_current_get(), NULL, exec, NULL, NULL);
 }
 
 static void

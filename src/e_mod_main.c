@@ -525,7 +525,7 @@ _places_cb_mouse_down(void *data, Evas *evas, Evas_Object *obj, void *event)
         E_Menu *m;
 
         /* grab current zone */
-        zone = e_util_zone_current_get(e_manager_current_get());
+        zone = e_zone_current_get();
 
         /* create popup menu */
         m = e_menu_new();
