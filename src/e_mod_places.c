@@ -500,10 +500,9 @@ places_run_fm(const char *directory)
    else
      {
         E_Action *act = e_action_find("fileman");
-        Eina_List *managers = e_manager_list();
 
-        if (act && act->func.go && managers && managers->data)
-          act->func.go(E_OBJECT(managers->data), directory);
+        if (act && act->func.go)
+          act->func.go(E_OBJECT(e_comp), directory);
         else
           e_util_dialog_internal(D_("Warning"),
                       D_("<b>Cannot run the Enlightenment FileManager.</b><br>"

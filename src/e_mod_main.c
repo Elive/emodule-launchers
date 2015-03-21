@@ -514,7 +514,6 @@ _places_cb_mouse_down(void *data, Evas *evas, Evas_Object *obj, void *event)
 {
    Instance *inst = NULL;
    Evas_Event_Mouse_Down *ev;
-   E_Zone *zone = NULL;
    E_Menu_Item *mi = NULL;
    int x, y;
 
@@ -523,9 +522,6 @@ _places_cb_mouse_down(void *data, Evas *evas, Evas_Object *obj, void *event)
    if ((ev->button == 3) && (!inst->menu))
      {
         E_Menu *m;
-
-        /* grab current zone */
-        zone = e_zone_current_get();
 
         /* create popup menu */
         m = e_menu_new();
@@ -544,7 +540,8 @@ _places_cb_mouse_down(void *data, Evas *evas, Evas_Object *obj, void *event)
                                           NULL, NULL);
 
         /* show the menu relative to gadgets position */
-        e_menu_activate_mouse(m, zone, (x + ev->output.x),
+        e_menu_activate_mouse(m, e_zone_current_get(),
+                              (x + ev->output.x),
                               (y + ev->output.y), 1, 1,
                               E_MENU_POP_DIRECTION_AUTO, ev->timestamp);
         evas_event_feed_mouse_up(inst->gcc->gadcon->evas, ev->button,
