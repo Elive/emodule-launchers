@@ -41,6 +41,7 @@ struct _Config
    unsigned char show_root;
    unsigned char show_temp;
    unsigned char show_bookm;
+   unsigned char show_elive_labels;
 };
 
 typedef struct _Config_Item Config_Item;

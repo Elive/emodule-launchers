@@ -5,7 +5,7 @@ images
    image: "eject.png" COMP;
    image: "eject_bg.png" COMP;
    image: "tag_ext3.png" COMP;
-   image: "tag_fat.png" COMP;
+   /*image: "tag_fat.png" COMP;*/
    image: "tag_hfs.png" COMP;
    image: "tag_ufs.png" COMP;
    image: "tag_dvd.png" COMP;
@@ -389,11 +389,11 @@ collections
                image.normal: "tag_ext3.png";
                color: 255 255 255 240;
             }
-            description { state: "fat" 0.0;
-               inherit: "default" 0.0;
-               image.normal: "tag_fat.png";
-               color: 255 255 255 240;
-            }
+            /*description { state: "fat" 0.0;*/
+               /*inherit: "default" 0.0;*/
+               /*image.normal: "tag_fat.png";*/
+               /*color: 255 255 255 240;*/
+            /*}*/
             description { state: "hfs" 0.0;
                inherit: "default" 0.0;
                image.normal: "tag_hfs.png";
@@ -694,12 +694,12 @@ collections
             action: STATE_SET "ext3" 0.0;
             target: "icon_tag";
          }
-         program { name: "set_tag_fat";
-            signal: "icon,tag,fat";
-            source: "places";
-            action: STATE_SET "fat" 0.0;
-            target: "icon_tag";
-         }
+         /*program { name: "set_tag_fat";*/
+            /*signal: "icon,tag,fat";*/
+            /*source: "places";*/
+            /*action: STATE_SET "fat" 0.0;*/
+            /*target: "icon_tag";*/
+         /*}*/
          program { name: "set_tag_hfs";
             signal: "icon,tag,hfs";
             source: "places";

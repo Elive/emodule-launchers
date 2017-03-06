@@ -248,6 +248,7 @@ places_fill_box(Evas_Object *main, Eina_Bool horiz)
 
    places_empty_box(main);
 
+
    /*if (places_conf->show_home)
       _places_custom_volume(box, D_("Home"), "e/icons/fileman/home", "/home/dave");
    if (places_conf->show_desk)
@@ -290,12 +291,34 @@ places_fill_box(Evas_Object *main, Eina_Bool horiz)
    edje_object_signal_callback_add(o, "header,activated", "places",
                                    _places_header_activated_cb, NULL);
 
+
    // volume objects
    for (l = volumes; l; l = l->next)
      {
         Volume *vol = l->data;
 
         if (!vol->valid) continue;
+
+        // Elive (live) specific: don't show the live mountpoints:
+        if (vol->mounted  && vol->mount_point &&
+            eina_str_has_prefix(vol->mount_point, "/lib/live/mount/"))
+          continue;
+
+        if (
+           ! (places_conf->show_elive_labels) &&
+           (vol->label) && 
+           (
+           (eina_str_has_prefix(vol->label, "Elive")) ||
+              (eina_str_has_prefix(vol->label, "ELIVE")) ||
+               (eina_str_has_prefix(vol->label, "elive"))
+               )
+           )
+          {
+             continue;
+             /*vol->label = "IGNORED";*/
+          }
+
+        // End Elive
 
         //volume object
         o = edje_object_add(evas_object_evas_get(main));
@@ -472,8 +495,13 @@ places_volume_unmount(Volume *vol)
 void
 places_volume_eject(Volume *vol)
 {
-   if (vol && vol->eject_func)
-     vol->eject_func(vol, NULL);
+   if (vol && vol->device)
+     {
+        /*vol->eject_func(vol, NULL);*/
+        char eject_param[256];
+        snprintf(eject_param, sizeof(eject_param), "eject %s", vol->device);
+        ecore_exe_run(eject_param, NULL);
+     }
 }
 
 void

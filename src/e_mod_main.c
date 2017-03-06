@@ -89,6 +89,7 @@ e_modapi_init(E_Module *m)
    E_CONFIG_VAL(D, T, show_root, UCHAR);
    E_CONFIG_VAL(D, T, show_temp, UCHAR);
    E_CONFIG_VAL(D, T, show_bookm, UCHAR);
+   E_CONFIG_VAL(D, T, show_elive_labels, UCHAR);
 
    /* Tell E to find any existing module data. First run ? */
    places_conf = e_config_domain_load("module.places", conf_edd);
@@ -356,6 +357,7 @@ _places_conf_new(void)
    places_conf->show_root = 0;
    places_conf->show_temp = 0;
    places_conf->show_bookm = 1;
+   places_conf->show_elive_labels = 0;
    _places_conf_item_get(NULL);
    IFMODCFGEND;
 

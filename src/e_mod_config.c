@@ -19,6 +19,7 @@ struct _E_Config_Dialog_Data
    int show_root;
    int show_temp;
    int show_bookm;
+   int show_elive_labels;
 };
 
 /* Local Function Prototypes */
@@ -92,6 +93,7 @@ _fill_data(E_Config_Dialog_Data *cfdata)
    cfdata->show_root = places_conf->show_root;
    cfdata->show_temp = places_conf->show_temp;
    cfdata->show_bookm = places_conf->show_bookm;
+   cfdata->show_elive_labels = places_conf->show_elive_labels;
 
    if (places_conf->fm)
      cfdata->fm = strdup(places_conf->fm);
@@ -171,6 +173,15 @@ _basic_create(E_Config_Dialog *cfd, Evas *evas, E_Config_Dialog_Data *cfdata)
 
    e_widget_list_object_append(o, of, 1, 1, 0.5);
 
+   // Elive frame
+   of = e_widget_framelist_add(evas, D_("Elive Features"), 0);
+   e_widget_framelist_content_align_set(of, 0.0, 0.0);
+
+   ow = e_widget_check_add(evas, D_("Show Elive labels"), &(cfdata->show_elive_labels));
+   e_widget_framelist_object_append(of, ow);
+
+   e_widget_list_object_append(o, of, 1, 1, 0.5);
+
    //Display frame
    of = e_widget_framelist_add(evas, D_("Show in menu"), 0);
    e_widget_framelist_content_align_set(of, 0.0, 0.0);
@@ -212,6 +223,7 @@ _basic_apply(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata)
    places_conf->show_root = cfdata->show_root;
    places_conf->show_temp = cfdata->show_temp;
    places_conf->show_bookm = cfdata->show_bookm;
+   places_conf->show_elive_labels = cfdata->show_elive_labels;
 
    const char *fm = eina_stringshare_add(cfdata->fm);
    eina_stringshare_del(places_conf->fm);
