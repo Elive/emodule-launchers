@@ -350,8 +350,8 @@ _places_conf_new(void)
    places_conf->auto_mount = 0;
    places_conf->auto_open = 0;
    places_conf->show_home = 1;
-   places_conf->hide_header = 0;
-   places_conf->show_desk = 1;
+   places_conf->hide_header = 1;
+   places_conf->show_desk = 0;
    places_conf->show_trash = 0;
    places_conf->show_root = 0;
    places_conf->show_temp = 0;
