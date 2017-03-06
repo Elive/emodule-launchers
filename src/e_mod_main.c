@@ -360,7 +360,7 @@ _places_conf_new(void)
    IFMODCFGEND;
 
    IFMODCFG(0x008e);
-   places_conf->fm = NULL;
+   places_conf->fm = "thunar";
    IFMODCFGEND;
 
    /* update the version */
