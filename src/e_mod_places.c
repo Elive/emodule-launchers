@@ -51,7 +51,7 @@ places_init(void)
    places_udisks_eldbus_init();
 #endif
 
-   snprintf(theme_file, PATH_MAX, "%s/e-module-places.edj",
+   snprintf(theme_file, sizeof(theme_file), "%s/e-module-places.edj",
             places_conf->module->dir);
    poller = ecore_timer_add(3.0, _places_poller, NULL);
 }
@@ -660,7 +660,7 @@ _places_run_fm_external(const char *fm, const char *directory)
 {
    char exec[PATH_MAX] = NULL;
 
-   snprintf(exec, PATH_MAX, "%s \"%s\"", (char*)fm, (char*)directory);
+   snprintf(exec, sizeof(exec), "%s \"%s\"", (char*)fm, (char*)directory);
    /*e_exec(NULL, NULL, exec, NULL, NULL);*/
    e_exec(e_zone_current_get(e_container_current_get(e_manager_current_get())), NULL, exec, NULL, NULL);
 }
