@@ -658,7 +658,7 @@ _places_human_size_get(unsigned long long size)
 static void
 _places_run_fm_external(const char *fm, const char *directory)
 {
-   char exec[PATH_MAX] = NULL;
+   char exec[PATH_MAX];
 
    snprintf(exec, sizeof(exec), "%s \"%s\"", (char*)fm, (char*)directory);
    /*e_exec(NULL, NULL, exec, NULL, NULL);*/
