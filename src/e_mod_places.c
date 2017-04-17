@@ -308,8 +308,9 @@ places_fill_box(Evas_Object *main, Eina_Bool horiz)
            ! (places_conf->show_elive_labels) &&
            (vol->label) && 
            (
-              (eina_str_has_prefix(vol->label, "Elive")) ||
               (eina_str_has_prefix(vol->label, "Live_")) ||
+              (eina_str_has_prefix(vol->label, "LIVE_")) ||
+              (eina_str_has_prefix(vol->label, "Elive")) ||
               (eina_str_has_prefix(vol->label, "ELIVE")) ||
               (eina_str_has_prefix(vol->label, "elive"))
            )
