@@ -321,7 +321,8 @@ places_fill_box(Evas_Object *main, Eina_Bool horiz)
           }
 
         // skip not-removable volumes
-        if ((places_conf->show_removable_only) && (!vol->removable))
+        if ( (places_conf->show_removable_only) && (
+              (!vol->removable) && (!vol->requires_eject)) )
           continue;
 
 
