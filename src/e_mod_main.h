@@ -42,6 +42,7 @@ struct _Config
    unsigned char show_temp;
    unsigned char show_bookm;
    unsigned char show_elive_labels;
+   unsigned char show_removable_only;
 };
 
 typedef struct _Config_Item Config_Item;
